@@ -55,6 +55,42 @@
 		>
 	</section>
 	<TrustBar />
+	<section class="section personal">
+		<div class="section-heading centered">
+			<p class="eyebrow">Från vår lilla verkstad</p>
+			<h2>Skapat av oss</h2>
+			<p>
+				Systrarna Halldin är vår lilla butik med handgjorda armband, nyckelringar och andra saker vi
+				själva tycker om att skapa.
+			</p>
+		</div>
+		<div class="signature-cards">
+			<article class="signature-card alma-card">
+				<img
+					src="/images/handritat/alma-star-transparent.png"
+					alt="Almas handritade stjärna"
+					width="1536"
+					height="1024"
+				/>
+				<div>
+					<h3>Alma</h3>
+					<p>Almas handritade stjärna</p>
+				</div>
+			</article>
+			<article class="signature-card emilia-card">
+				<img
+					src="/images/handritat/emilia-the-star-transparent.png"
+					alt="Emilias handritade stjärna med texten The star"
+					width="918"
+					height="588"
+				/>
+				<div>
+					<h3>Emilia</h3>
+					<p>Emilias handritade stjärna</p>
+				</div>
+			</article>
+		</div>
+	</section>
 	<section class="story">
 		<div class="story-art">
 			<span>♡</span>

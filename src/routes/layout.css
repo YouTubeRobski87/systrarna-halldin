@@ -454,6 +454,30 @@ footer div:not(.footer-bottom) {
 	flex-direction: column;
 	gap: 0.55rem;
 }
+.footer-signature {
+	margin-top: 0.45rem;
+	display: flex !important;
+	flex-direction: row !important;
+	align-items: center;
+	gap: 0.5rem !important;
+	color: #d9d3dd;
+	font-size: 0.76rem;
+}
+.footer-stars {
+	display: flex !important;
+	flex-direction: row !important;
+	align-items: center;
+	gap: 0.1rem !important;
+	flex: none;
+}
+.footer-stars img {
+	width: 28px;
+	height: auto;
+	max-height: 23px;
+	object-fit: contain;
+	filter: brightness(0) invert(1);
+	opacity: 0.75;
+}
 footer b {
 	font-size: 0.9rem;
 }
@@ -785,12 +809,38 @@ nav {
 	display: grid;
 	grid-template-columns: 1.08fr 0.92fr;
 	overflow: hidden;
+	position: relative;
+}
+.hero-signatures {
+	position: absolute;
+	inset: 0;
+	pointer-events: none;
+	z-index: 2;
+}
+.hero-star {
+	position: absolute;
+	width: clamp(140px, 12vw, 190px);
+	height: auto;
+	object-fit: contain;
+	opacity: 0.72;
+}
+.hero-star-alma {
+	left: 55%;
+	bottom: 7%;
+	transform: rotate(-9deg);
+}
+.hero-star-emilia {
+	right: 3%;
+	top: 6%;
+	transform: rotate(7deg);
 }
 .hero-copy {
 	max-width: 600px;
 	align-self: center;
 	justify-self: end;
 	padding: 5.5rem 4rem 5.5rem 1.25rem;
+	position: relative;
+	z-index: 3;
 }
 .eyebrow {
 	margin: 0 0 0.8rem;
@@ -975,6 +1025,59 @@ main {
 }
 .featured {
 	padding-top: 2rem;
+}
+.personal {
+	padding-top: 2rem;
+}
+.signature-cards {
+	display: grid;
+	grid-template-columns: repeat(2, minmax(0, 1fr));
+	gap: 1.25rem;
+	max-width: 760px;
+	margin: 0 auto;
+}
+.signature-card {
+	min-height: 260px;
+	padding: 1.7rem;
+	border-radius: 20px;
+	display: grid;
+	grid-template-columns: minmax(0, 1fr) auto;
+	align-items: center;
+	gap: 1.25rem;
+	overflow: hidden;
+	transition:
+		transform 0.2s,
+		box-shadow 0.2s;
+}
+.signature-card:hover {
+	transform: translateY(-3px);
+	box-shadow: 0 12px 25px #3e3a5517;
+}
+.signature-card img {
+	width: min(100%, 190px);
+	height: auto;
+	max-height: 140px;
+	object-fit: contain;
+	grid-column: 2;
+	grid-row: 1;
+}
+.signature-card div {
+	grid-column: 1;
+	grid-row: 1;
+}
+.signature-card h3 {
+	font-size: 1.8rem;
+}
+.signature-card p {
+	margin: 0.45rem 0 0;
+	color: #665d60;
+	font-size: 0.9rem;
+}
+.alma-card {
+	background: #f7dce3;
+}
+.emilia-card {
+	background: #dcefe7;
 }
 .product-grid {
 	display: grid;
@@ -1225,6 +1328,24 @@ main {
 		min-height: 0;
 		display: block;
 	}
+	.hero-signatures {
+		position: relative;
+		inset: auto;
+		height: 92px;
+		width: 100%;
+	}
+	.hero-star {
+		width: clamp(80px, 23vw, 105px);
+		opacity: 0.68;
+	}
+	.hero-star-alma {
+		left: 14%;
+		bottom: 0;
+	}
+	.hero-star-emilia {
+		right: 11%;
+		top: 7px;
+	}
 	.hero-copy {
 		max-width: 100%;
 		padding: 3rem 1.25rem 2.5rem;
@@ -1275,6 +1396,20 @@ main {
 	.product-copy > p:not(.eyebrow) {
 		display: block;
 		min-height: 0;
+	}
+	.personal {
+		padding-top: 1rem;
+	}
+	.signature-cards {
+		grid-template-columns: minmax(0, 1fr);
+	}
+	.signature-card {
+		min-height: 190px;
+		padding: 1.3rem;
+	}
+	.signature-card img {
+		width: min(35vw, 135px);
+		max-height: 105px;
 	}
 	.trust-bar {
 		align-items: stretch;
