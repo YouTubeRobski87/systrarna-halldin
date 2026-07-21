@@ -1,13 +1,15 @@
 import { browser } from '$app/environment';
 import { derived, writable } from 'svelte/store';
 import { products } from '$lib/data/products';
-import type { Product } from '$lib/types/product';
+import { bonusBeads, type BonusBead, type Product } from '$lib/types/product';
 
-export type CartItem = { product: Product; quantity: number; variation?: string };
+export type CartItem = { product: Product; quantity: number; bonusBead?: BonusBead };
 const key = 'systrarna-halldin-cart';
 const storedItems: CartItem[] = browser ? JSON.parse(localStorage.getItem(key) ?? '[]') : [];
-const initial = storedItems.filter((item) =>
-	products.some((product) => product.id === item.product?.id)
+const initial = storedItems.filter(
+	(item) =>
+		products.some((product) => product.id === item.product?.id) &&
+		(item.bonusBead === undefined || bonusBeads.includes(item.bonusBead))
 );
 export const cart = writable<CartItem[]>(initial);
 if (browser) cart.subscribe((items) => localStorage.setItem(key, JSON.stringify(items)));
@@ -17,11 +19,11 @@ export const cartCount = derived(cart, (items) =>
 export const cartTotal = derived(cart, (items) =>
 	items.reduce((sum, item) => sum + item.product.price * item.quantity, 0)
 );
-export function addToCart(product: Product, variation?: string, quantity = 1) {
+export function addToCart(product: Product, bonusBead?: BonusBead, quantity = 1) {
 	const maxQuantity = 99;
 	cart.update((items) => {
 		const found = items.find(
-			(item) => item.product.id === product.id && item.variation === variation
+			(item) => item.product.id === product.id && item.bonusBead === bonusBead
 		);
 		if (found)
 			return items.map((item) =>
@@ -29,15 +31,15 @@ export function addToCart(product: Product, variation?: string, quantity = 1) {
 					? { ...item, quantity: Math.min(item.quantity + quantity, maxQuantity) }
 					: item
 			);
-		return [...items, { product, variation, quantity: Math.min(quantity, maxQuantity) }];
+		return [...items, { product, bonusBead, quantity: Math.min(quantity, maxQuantity) }];
 	});
 }
-export function updateQuantity(id: string, quantity: number, variation?: string) {
+export function updateQuantity(id: string, quantity: number, bonusBead?: BonusBead) {
 	cart.update((items) =>
 		quantity < 1
-			? items.filter((item) => !(item.product.id === id && item.variation === variation))
+			? items.filter((item) => !(item.product.id === id && item.bonusBead === bonusBead))
 			: items.map((item) =>
-					item.product.id === id && item.variation === variation
+					item.product.id === id && item.bonusBead === bonusBead
 						? { ...item, quantity: Math.min(quantity, 99) }
 						: item
 				)

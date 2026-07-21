@@ -18,8 +18,8 @@
 			text: 'Armband och nyckelringar sätts ihop med stor omsorg.'
 		},
 		{
-			title: 'Färdig skapelse',
-			text: 'Varje färdig produkt blir unik på sitt eget sätt.'
+			title: 'En pärla på köpet',
+			text: 'Till varje armband eller nyckelring får du välja en extra pärla som skickas med utan kostnad.'
 		}
 	];
 	const structuredData = JSON.stringify({

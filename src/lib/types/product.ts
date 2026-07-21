@@ -1,5 +1,19 @@
 export type Category = 'Armband' | 'Nyckelringar';
 export type MadeBy = 'Alma' | 'Emilia';
+export const bonusBeads = [
+	'Överraska mig',
+	'Rosa',
+	'Lila',
+	'Blå',
+	'Grön',
+	'Gul',
+	'Orange',
+	'Röd',
+	'Regnbåge'
+] as const;
+export type BonusBead = (typeof bonusBeads)[number];
+export const hasBonusBeadOffer = (category: Category) =>
+	category === 'Armband' || category === 'Nyckelringar';
 
 export interface Product {
 	id: string;

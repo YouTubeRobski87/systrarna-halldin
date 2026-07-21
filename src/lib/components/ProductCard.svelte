@@ -1,11 +1,11 @@
 <script lang="ts">
-	import type { Product } from '$lib/types/product';
+	import { bonusBeads, hasBonusBeadOffer, type Product } from '$lib/types/product';
 	import { addToCart } from '$lib/stores/cart';
 	import { currency } from '$lib/utils/currency';
 	let { product }: { product: Product } = $props();
 	let added = $state(false);
 	function add() {
-		addToCart(product);
+		addToCart(product, hasBonusBeadOffer(product.category) ? bonusBeads[0] : undefined);
 		added = true;
 		setTimeout(() => (added = false), 1800);
 	}

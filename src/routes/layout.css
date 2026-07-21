@@ -97,6 +97,73 @@
 	height: 26px;
 	object-fit: contain;
 }
+.bonus-beads {
+	border: 0;
+	padding: 0;
+	margin: 1.5rem 0;
+}
+.bonus-beads legend {
+	font-family: Fraunces, Georgia, serif;
+	font-size: 1.2rem;
+	font-weight: 600;
+}
+.bonus-beads > p {
+	margin: 0.45rem 0 1rem;
+	color: #6c6165;
+	font-size: 0.88rem;
+}
+.bonus-bead-options {
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+	gap: 0.55rem;
+}
+.bonus-bead-options label {
+	position: relative;
+	display: flex;
+	align-items: center;
+	gap: 0.45rem;
+	min-height: 44px;
+	padding: 0.55rem 0.65rem;
+	border: 1px solid #e5d9dc;
+	border-radius: 12px;
+	background: #fff;
+	font-size: 0.84rem;
+	font-weight: 600;
+	cursor: pointer;
+}
+.bonus-bead-options label.chosen {
+	border-color: #a35e7b;
+	background: #f9e4ea;
+	color: #803b5d;
+}
+.bonus-bead-options label:focus-within {
+	outline: 3px solid #876eb8;
+	outline-offset: 2px;
+}
+.bonus-bead-options input {
+	position: absolute;
+	opacity: 0;
+	pointer-events: none;
+}
+.bonus-bead-dot {
+	width: 15px;
+	height: 15px;
+	flex: none;
+	border: 1px solid #cda7b6;
+	border-radius: 50%;
+	background: radial-gradient(circle at 35% 30%, #fff8fb 0 18%, #e4a7bb 20% 65%, #b56d8c 67%);
+}
+.bonus-bead-options label.chosen .bonus-bead-dot {
+	box-shadow:
+		0 0 0 3px #fff,
+		0 0 0 4px #a35e7b;
+}
+.order-summary span small {
+	display: block;
+	margin-top: 0.2rem;
+	color: #6a6267;
+	font-weight: 400;
+}
 .purchase {
 	display: flex;
 	gap: 1rem;

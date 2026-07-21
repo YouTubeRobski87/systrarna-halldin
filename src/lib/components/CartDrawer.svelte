@@ -11,7 +11,7 @@
 		<button onclick={close} aria-label="Stäng varukorg">×</button>
 	</div>
 	{#if $cart.length}<div class="cart-list">
-			{#each $cart as item (`${item.product.id}-${item.variation}`)}<div class="cart-item">
+			{#each $cart as item (`${item.product.id}-${item.bonusBead}`)}<div class="cart-item">
 					<span class="mini-image"
 						><img
 							src={item.product.image}
@@ -21,22 +21,21 @@
 						/></span
 					>
 					<div>
-						<b>{item.product.name}</b>{#if item.variation}<small>{item.variation}</small>{/if}<small
-							>{currency(item.product.price)}</small
-						>
+						<b>{item.product.name}</b>{#if item.bonusBead}<small>Bonuspärla: {item.bonusBead}</small
+							>{/if}<small>{currency(item.product.price)}</small>
 						<div class="inline-qty">
 							<button
-								onclick={() => updateQuantity(item.product.id, item.quantity - 1, item.variation)}
+								onclick={() => updateQuantity(item.product.id, item.quantity - 1, item.bonusBead)}
 								>−</button
 							><span>{item.quantity}</span><button
-								onclick={() => updateQuantity(item.product.id, item.quantity + 1, item.variation)}
+								onclick={() => updateQuantity(item.product.id, item.quantity + 1, item.bonusBead)}
 								>+</button
 							>
 						</div>
 					</div>
 					<button
 						class="remove"
-						onclick={() => updateQuantity(item.product.id, 0, item.variation)}
+						onclick={() => updateQuantity(item.product.id, 0, item.bonusBead)}
 						aria-label="Ta bort">×</button
 					>
 				</div>{/each}

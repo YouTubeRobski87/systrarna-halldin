@@ -67,9 +67,11 @@
 <aside class="order-summary">
 	<h2>Din beställning</h2>
 	{#if $cart.length}{#each $cart as item}<div>
-				<span>{item.quantity} × {item.product.name}</span><b
-					>{currency(item.product.price * item.quantity)}</b
-				>
+				<span
+					>{item.quantity} × {item.product.name}{#if item.bonusBead}<small
+							>Bonuspärla: {item.bonusBead}</small
+						>{/if}</span
+				><b>{currency(item.product.price * item.quantity)}</b>
 			</div>{/each}
 		<hr />
 		<div class="summary-total"><span>Totalt</span><strong>{currency($cartTotal)}</strong></div>

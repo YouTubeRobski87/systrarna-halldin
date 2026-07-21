@@ -14,7 +14,7 @@
 	<h1>Varukorg</h1>
 	{#if $cart.length}<div class="cart-page-grid">
 			<section class="cart-list large">
-				{#each $cart as item (`${item.product.id}-${item.variation}`)}<article class="cart-item">
+				{#each $cart as item (`${item.product.id}-${item.bonusBead}`)}<article class="cart-item">
 						<span class="mini-image"
 							><img
 								src={item.product.image}
@@ -25,20 +25,22 @@
 						>
 						<div class="cart-product">
 							<h2>{item.product.name}</h2>
-							{#if item.variation}<p>{item.variation}</p>{/if}<b>{currency(item.product.price)}</b>
+							{#if item.bonusBead}<p>Bonuspärla: {item.bonusBead}</p>{/if}<b
+								>{currency(item.product.price)}</b
+							>
 						</div>
 						<div class="inline-qty">
 							<button
-								onclick={() => updateQuantity(item.product.id, item.quantity - 1, item.variation)}
+								onclick={() => updateQuantity(item.product.id, item.quantity - 1, item.bonusBead)}
 								>−</button
 							><span>{item.quantity}</span><button
-								onclick={() => updateQuantity(item.product.id, item.quantity + 1, item.variation)}
+								onclick={() => updateQuantity(item.product.id, item.quantity + 1, item.bonusBead)}
 								>+</button
 							>
 						</div>
 						<strong>{currency(item.product.price * item.quantity)}</strong><button
 							class="remove"
-							onclick={() => updateQuantity(item.product.id, 0, item.variation)}>Ta bort</button
+							onclick={() => updateQuantity(item.product.id, 0, item.bonusBead)}>Ta bort</button
 						>
 					</article>{/each}
 			</section>

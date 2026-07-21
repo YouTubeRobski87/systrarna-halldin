@@ -3,11 +3,14 @@
 	import { products } from '$lib/data/products';
 	import { addToCart } from '$lib/stores/cart';
 	import { currency } from '$lib/utils/currency';
+	import { bonusBeads, hasBonusBeadOffer, type BonusBead } from '$lib/types/product';
 	import QuantitySelector from '$lib/components/QuantitySelector.svelte';
 	import ProductGrid from '$lib/components/ProductGrid.svelte';
 	let { data }: { data: PageData } = $props();
 	let quantity = $state(1);
+	let bonusBead = $state<BonusBead>(bonusBeads[0]);
 	let added = $state(false);
+	const canChooseBonusBead = $derived(hasBonusBeadOffer(data.product.category));
 	const madeByStar = $derived(
 		data.product.madeBy === 'Alma'
 			? '/images/handritat/alma-star-transparent.png'
@@ -34,7 +37,7 @@
 			.slice(0, 3)
 	);
 	function add() {
-		addToCart(data.product, undefined, quantity);
+		addToCart(data.product, canChooseBonusBead ? bonusBead : undefined, quantity);
 		added = true;
 		setTimeout(() => (added = false), 1800);
 	}
@@ -75,6 +78,21 @@
 					/>
 					<span>Tillverkad av {data.product.madeBy}</span>
 				</p>{/if}
+			{#if canChooseBonusBead}<fieldset class="bonus-beads">
+					<legend>Välj en gratis bonuspärla</legend>
+					<p>
+						En extra pärla skickas med som ett litet tillbehör. Den är inte monterad på produkten.
+					</p>
+					<div class="bonus-bead-options">
+						{#each bonusBeads as bead}
+							<label class:chosen={bonusBead === bead}>
+								<input type="radio" name="bonus-bead" value={bead} bind:group={bonusBead} />
+								<span class="bonus-bead-dot" aria-hidden="true"></span>
+								<span>{bead}</span>
+							</label>
+						{/each}
+					</div>
+				</fieldset>{/if}
 			<div class="purchase">
 				<QuantitySelector
 					value={quantity}
