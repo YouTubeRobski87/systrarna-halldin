@@ -67,6 +67,12 @@
 			<p class="eyebrow">{data.product.category}</p>
 			<h1>{data.product.name}</h1>
 			<strong class="price">{currency(data.product.price)}</strong>
+			{#if canChooseBonusBead}
+				<div class="product-promises">
+					<p>🎁 Extra pärla medföljer</p>
+					<p>Handgjord av Alma & Emilia ❤️</p>
+				</div>
+			{/if}
 			<p class="description">{data.product.description}</p>
 			{#if data.product.madeBy && madeByStar}<p class="made-by">
 					<img

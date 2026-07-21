@@ -31,6 +31,9 @@
 				onclick={add}>+</button
 			>
 		</div>
+		{#if hasBonusBeadOffer(product.category)}
+			<p class="product-offer">🎁 Extra pärla medföljer</p>
+		{/if}
 		{#if added}<span class="toast">Tillagd i varukorgen</span>{/if}
 	</div>
 </article>
