@@ -8,6 +8,13 @@
 	let { data }: { data: PageData } = $props();
 	let quantity = $state(1);
 	let added = $state(false);
+	const madeByStar = $derived(
+		data.product.madeBy === 'Alma'
+			? '/images/handritat/alma-star-transparent.png'
+			: data.product.madeBy === 'Emilia'
+				? '/images/handritat/emilia-the-star-transparent.png'
+				: undefined
+	);
 	let structuredData = $derived(
 		JSON.stringify({
 			'@context': 'https://schema.org',
@@ -58,6 +65,16 @@
 			<h1>{data.product.name}</h1>
 			<strong class="price">{currency(data.product.price)}</strong>
 			<p class="description">{data.product.description}</p>
+			{#if data.product.madeBy && madeByStar}<p class="made-by">
+					<img
+						src={madeByStar}
+						alt=""
+						aria-hidden="true"
+						width={data.product.madeBy === 'Alma' ? 1536 : 918}
+						height={data.product.madeBy === 'Alma' ? 1024 : 588}
+					/>
+					<span>Tillverkad av {data.product.madeBy}</span>
+				</p>{/if}
 			<div class="purchase">
 				<QuantitySelector
 					value={quantity}

@@ -41,7 +41,7 @@ export const products: Product[] = [
 		imageAlt: 'Rosa pärlnyckelring',
 		imageWidth: 1536,
 		imageHeight: 2048,
-		featured: true
+		featured: false
 	},
 	{
 		id: 'orange-bead-keyring',
@@ -55,7 +55,7 @@ export const products: Product[] = [
 		imageAlt: 'Orange pärlnyckelring',
 		imageWidth: 1536,
 		imageHeight: 2048,
-		featured: true
+		featured: false
 	},
 	{
 		id: 'purple-moon-keyring',
@@ -154,8 +154,92 @@ export const products: Product[] = [
 		imageWidth: 1536,
 		imageHeight: 2048,
 		featured: false
+	},
+	{
+		id: 'pink-bead-bracelet',
+		slug: 'rosa-parlarmband',
+		name: 'Rosa pärlarmband',
+		shortDescription: 'Ett armband i rosa toner.',
+		description: 'Ett rosa pärlarmband som blir en färgglad detalj på handleden.',
+		price: 49,
+		category: 'Armband',
+		image: '/images/produkter/original/armband/rosa-parlarmband-01.jpg',
+		imageAlt: 'Rosa pärlarmband',
+		imageWidth: 1536,
+		imageHeight: 2048,
+		featured: true
+	},
+	{
+		id: 'cerise-bead-bracelet',
+		slug: 'cerise-parlarmband',
+		name: 'Cerise pärlarmband',
+		shortDescription: 'Ett armband i cerise toner.',
+		description: 'Ett cerise pärlarmband som ger en tydlig färgklick.',
+		price: 49,
+		category: 'Armband',
+		image: '/images/produkter/original/armband/cerise-parlarmband-01.jpg',
+		imageAlt: 'Cerise pärlarmband',
+		imageWidth: 2250,
+		imageHeight: 3000,
+		featured: true
+	},
+	{
+		id: 'rainbow-bracelet',
+		slug: 'regnbagsarmband',
+		name: 'Regnbågsarmband',
+		shortDescription: 'Ett armband med regnbågsfärger.',
+		description: 'Ett färgglatt armband med regnbågsfärger.',
+		price: 49,
+		category: 'Armband',
+		image: '/images/produkter/original/armband/regnbagsarmband-01.jpg',
+		imageAlt: 'Regnbågsarmband',
+		imageWidth: 1536,
+		imageHeight: 2048,
+		featured: false
+	},
+	{
+		id: 'sunshine-bracelet',
+		slug: 'solskensarmband',
+		name: 'Solskensarmband',
+		shortDescription: 'Ett armband i soliga färger.',
+		description: 'Ett armband med varma, soliga färger.',
+		price: 49,
+		category: 'Armband',
+		image: '/images/produkter/original/armband/solsken-armband-01.jpg',
+		imageAlt: 'Solskensarmband',
+		imageWidth: 1536,
+		imageHeight: 2048,
+		featured: false
+	},
+	{
+		id: 'purple-bead-bracelet',
+		slug: 'lila-parlarmband',
+		name: 'Lila pärlarmband',
+		shortDescription: 'Ett armband i lila toner.',
+		description: 'Ett lila pärlarmband med en mjuk färgton.',
+		price: 49,
+		category: 'Armband',
+		image: '/images/produkter/original/armband/lila-parlarmband-01.jpg',
+		imageAlt: 'Lila pärlarmband',
+		imageWidth: 1536,
+		imageHeight: 2048,
+		featured: false
+	},
+	{
+		id: 'purple-heart-bracelet',
+		slug: 'lila-hjartarmband',
+		name: 'Lila hjärtarmband',
+		shortDescription: 'Ett lila armband med hjärtdetalj.',
+		description: 'Ett lila armband med en hjärtdetalj.',
+		price: 49,
+		category: 'Armband',
+		image: '/images/produkter/original/armband/lila-hjartarmband-01.jpg',
+		imageAlt: 'Lila hjärtarmband',
+		imageWidth: 1536,
+		imageHeight: 2048,
+		featured: false
 	}
 ];
 
-export const categories = ['Alla', 'Nyckelringar'] as const;
+export const categories = ['Alla', 'Armband', 'Nyckelringar'] as const;
 export const getProduct = (slug: string) => products.find((product) => product.slug === slug);

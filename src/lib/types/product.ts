@@ -1,4 +1,5 @@
-export type Category = 'Nyckelringar';
+export type Category = 'Armband' | 'Nyckelringar';
+export type MadeBy = 'Alma' | 'Emilia';
 
 export interface Product {
 	id: string;
@@ -13,4 +14,5 @@ export interface Product {
 	imageWidth: number;
 	imageHeight: number;
 	featured: boolean;
+	madeBy?: MadeBy;
 }

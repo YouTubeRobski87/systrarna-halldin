@@ -19,8 +19,8 @@
 		<p class="eyebrow">✦ Små saker, stor glädje</p>
 		<h1>Handgjort med<br /><i>hjärta.</i></h1>
 		<p class="lead">
-			Välkommen till vår lilla butik med nyckelringar och andra favoriter – skapade av Alma &
-			Emilia.
+			Välkommen till vår lilla butik med armband, nyckelringar och andra favoriter – skapade av Alma
+			& Emilia.
 		</p>
 		<div class="actions">
 			<a class="button" href="/butik">Shoppa nu <span>→</span></a><a class="text-link" href="/om"

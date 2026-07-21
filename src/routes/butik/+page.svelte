@@ -31,7 +31,7 @@
 <svelte:head
 	><title>Butik – Systrarna Halldin</title><meta
 		name="description"
-		content="Shoppa handgjorda nyckelringar av Alma och Emilia."
+		content="Shoppa handgjorda armband och nyckelringar av Alma och Emilia."
 	/><link rel="canonical" href="https://systrarnahalldin.se/butik" /></svelte:head
 >
 <main class="page">

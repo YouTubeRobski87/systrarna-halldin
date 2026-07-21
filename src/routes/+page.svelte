@@ -16,7 +16,7 @@
 <svelte:head
 	><title>Systrarna Halldin – Handgjort av Alma & Emilia</title><meta
 		name="description"
-		content="Handgjorda nyckelringar och små favoriter av Alma & Emilia."
+		content="Handgjorda armband, nyckelringar och små favoriter av Alma & Emilia."
 	/><link rel="canonical" href="https://systrarnahalldin.se/" /><meta
 		property="og:title"
 		content="Systrarna Halldin"
@@ -39,8 +39,8 @@
 			<p class="eyebrow">Från vår lilla verkstad</p>
 			<h2>Skapat av oss</h2>
 			<p>
-				Systrarna Halldin är vår lilla butik med handgjorda nyckelringar och andra saker vi själva
-				tycker om att skapa.
+				Systrarna Halldin är vår lilla butik med handgjorda armband, nyckelringar och andra saker vi
+				själva tycker om att skapa.
 			</p>
 		</div>
 		<div class="signature-cards">
