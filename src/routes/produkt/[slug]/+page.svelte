@@ -93,7 +93,7 @@
 						{#each bonusBeads as bead}
 							<label class:chosen={bonusBead === bead}>
 								<input type="radio" name="bonus-bead" value={bead} bind:group={bonusBead} />
-								<span class="bonus-bead-dot" aria-hidden="true"></span>
+								<span class="bonus-bead-dot" data-bead={bead} aria-hidden="true"></span>
 								<span>{bead}</span>
 							</label>
 						{/each}

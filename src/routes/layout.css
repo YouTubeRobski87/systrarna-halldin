@@ -155,9 +155,26 @@
 	cursor: pointer;
 }
 .bonus-bead-options label.chosen {
-	border-color: #a35e7b;
+	border-color: #8065a7;
 	background: #f9e4ea;
 	color: #803b5d;
+}
+.bonus-bead-options label.chosen::after {
+	content: '✓';
+	position: absolute;
+	top: -0.35rem;
+	right: -0.3rem;
+	display: grid;
+	place-items: center;
+	width: 1.15rem;
+	height: 1.15rem;
+	border: 2px solid #fff;
+	border-radius: 50%;
+	background: #8065a7;
+	color: #fff;
+	font-size: 0.72rem;
+	font-weight: 700;
+	box-shadow: 0 2px 5px #4c3c6129;
 }
 .bonus-bead-options label:focus-within {
 	outline: 3px solid #876eb8;
@@ -169,17 +186,43 @@
 	pointer-events: none;
 }
 .bonus-bead-dot {
-	width: 15px;
-	height: 15px;
+	width: 18px;
+	height: 18px;
 	flex: none;
-	border: 1px solid #cda7b6;
+	border: 1px solid #d2c5cd;
 	border-radius: 50%;
-	background: radial-gradient(circle at 35% 30%, #fff8fb 0 18%, #e4a7bb 20% 65%, #b56d8c 67%);
+	background: radial-gradient(circle at 34% 28%, #fff 0 18%, #eee8e8 20% 66%, #cfc3c6 68%);
+	box-shadow: inset -1px -2px 3px #6b536219;
 }
 .bonus-bead-options label.chosen .bonus-bead-dot {
-	box-shadow:
-		0 0 0 3px #fff,
-		0 0 0 4px #a35e7b;
+	border: 2px solid #8065a7;
+	box-shadow: 0 3px 7px #4c3c6133;
+}
+.bonus-bead-dot[data-bead='Rosa'] {
+	background: radial-gradient(circle at 34% 28%, #fff8fb 0 18%, #f3bfd2 20% 66%, #d98ca9 68%);
+}
+.bonus-bead-dot[data-bead='Lila'] {
+	background: radial-gradient(circle at 34% 28%, #fff 0 18%, #d9caeb 20% 66%, #af94cf 68%);
+}
+.bonus-bead-dot[data-bead='Blå'] {
+	background: radial-gradient(circle at 34% 28%, #fff 0 18%, #bdddf2 20% 66%, #82b7d4 68%);
+}
+.bonus-bead-dot[data-bead='Grön'] {
+	background: radial-gradient(circle at 34% 28%, #fff 0 18%, #c3e7d8 20% 66%, #8fc8ad 68%);
+}
+.bonus-bead-dot[data-bead='Gul'] {
+	background: radial-gradient(circle at 34% 28%, #fff 0 18%, #f8e8a8 20% 66%, #e1c46c 68%);
+}
+.bonus-bead-dot[data-bead='Orange'] {
+	background: radial-gradient(circle at 34% 28%, #fffaf5 0 18%, #f7c8a6 20% 66%, #df9b73 68%);
+}
+.bonus-bead-dot[data-bead='Röd'] {
+	background: radial-gradient(circle at 34% 28%, #fff8f7 0 18%, #f2b5ae 20% 66%, #d8837e 68%);
+}
+.bonus-bead-dot[data-bead='Regnbåge'] {
+	background:
+		radial-gradient(circle at 34% 28%, #fff 0 15%, transparent 17%),
+		conic-gradient(from 15deg, #f1b5c5, #efd68e, #b9dfbc, #b9d8ea, #cdbce5, #f1b5c5);
 }
 .order-summary span small {
 	display: block;
