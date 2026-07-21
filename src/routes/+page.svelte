@@ -4,6 +4,24 @@
 	import TrustBar from '$lib/components/TrustBar.svelte';
 	import { products } from '$lib/data/products';
 	const featured = products.filter((product) => product.featured);
+	const makingSteps = [
+		{
+			title: 'Väljer pärlor',
+			text: 'Färger, former och detaljer väljs ut för varje ny skapelse.'
+		},
+		{
+			title: 'Provar en idé',
+			text: 'Olika kombinationer testas tills allt känns rätt.'
+		},
+		{
+			title: 'Skapar för hand',
+			text: 'Armband och nyckelringar sätts ihop med stor omsorg.'
+		},
+		{
+			title: 'Färdig skapelse',
+			text: 'Varje färdig produkt blir unik på sitt eget sätt.'
+		}
+	];
 	const structuredData = JSON.stringify({
 		'@context': 'https://schema.org',
 		'@type': 'Store',
@@ -68,6 +86,35 @@
 					<p>Emilias handritade stjärna</p>
 				</div>
 			</article>
+		</div>
+	</section>
+	<section class="section making">
+		<div class="making-image">
+			<img
+				src="/images/behind-the-scenes/parlor-och-material.jpg"
+				alt="Pärlor och material som används när Alma och Emilia skapar"
+				width="1536"
+				height="2048"
+			/>
+		</div>
+		<div class="making-content">
+			<p class="eyebrow">Bakom kulisserna</p>
+			<h2>Så skapar vi</h2>
+			<p class="making-intro">
+				Varje armband och nyckelring börjar bland pärlor, färger och idéer. Alma och Emilia väljer
+				själva kombinationer och skapar varje produkt för hand.
+			</p>
+			<ol class="making-steps">
+				{#each makingSteps as step, index}
+					<li>
+						<span>{index + 1}</span>
+						<div>
+							<h3>{step.title}</h3>
+							<p>{step.text}</p>
+						</div>
+					</li>
+				{/each}
+			</ol>
 		</div>
 	</section>
 	<section class="story">
