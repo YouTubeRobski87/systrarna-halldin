@@ -14,6 +14,7 @@ export const cartTotal = derived(cart, (items) =>
 	items.reduce((sum, item) => sum + item.product.price * item.quantity, 0)
 );
 export function addToCart(product: Product, variation?: string, quantity = 1) {
+	const maxQuantity = product.stock ?? 99;
 	cart.update((items) => {
 		const found = items.find(
 			(item) => item.product.id === product.id && item.variation === variation
@@ -21,10 +22,10 @@ export function addToCart(product: Product, variation?: string, quantity = 1) {
 		if (found)
 			return items.map((item) =>
 				item === found
-					? { ...item, quantity: Math.min(item.quantity + quantity, product.stock) }
+					? { ...item, quantity: Math.min(item.quantity + quantity, maxQuantity) }
 					: item
 			);
-		return [...items, { product, variation, quantity: Math.min(quantity, product.stock) }];
+		return [...items, { product, variation, quantity: Math.min(quantity, maxQuantity) }];
 	});
 }
 export function updateQuantity(id: string, quantity: number, variation?: string) {
@@ -33,7 +34,7 @@ export function updateQuantity(id: string, quantity: number, variation?: string)
 			? items.filter((item) => !(item.product.id === id && item.variation === variation))
 			: items.map((item) =>
 					item.product.id === id && item.variation === variation
-						? { ...item, quantity: Math.min(quantity, item.product.stock) }
+						? { ...item, quantity: Math.min(quantity, item.product.stock ?? 99) }
 						: item
 				)
 	);

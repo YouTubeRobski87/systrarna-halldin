@@ -10,7 +10,9 @@ export interface Product {
 	category: Category;
 	image: string;
 	imageAlt: string;
-	stock: number;
+	imageWidth?: number;
+	imageHeight?: number;
+	stock?: number;
 	featured: boolean;
 	colors?: string[];
 }

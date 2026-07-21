@@ -198,6 +198,12 @@
 	place-items: center;
 	font-size: 2.1rem;
 }
+.mini-image img {
+	width: 100%;
+	height: 100%;
+	object-fit: contain;
+	padding: 0.15rem;
+}
 .cart-item div:not(.inline-qty) {
 	flex: 1;
 	display: flex;
@@ -1106,9 +1112,19 @@ main {
 	background: #f4e7e1;
 	position: relative;
 }
+.product-image {
+	height: 210px;
+}
 .product-image span {
 	font-size: 5.4rem;
 	filter: drop-shadow(4px 6px 3px #8c707c33);
+}
+.product-image img,
+.detail-image img {
+	width: 100%;
+	height: 100%;
+	object-fit: contain;
+	padding: 0.75rem;
 }
 .product-image small {
 	position: absolute;
@@ -1392,6 +1408,7 @@ main {
 	}
 	.product-image {
 		min-height: 220px;
+		height: 220px;
 	}
 	.product-copy > p:not(.eyebrow) {
 		display: block;

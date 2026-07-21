@@ -13,7 +13,16 @@
 
 <article class="product-card">
 	<a href={`/produkt/${product.slug}`} class="product-image" aria-label={`Se ${product.name}`}
-		><span>{product.image}</span>{#if product.stock < 4}<small>Få kvar</small>{/if}</a
+		>{#if product.image.startsWith('/')}
+			<img
+				src={product.image}
+				alt={product.imageAlt}
+				width={product.imageWidth}
+				height={product.imageHeight}
+			/>
+		{:else}
+			<span>{product.image}</span>
+		{/if}{#if product.stock !== undefined && product.stock < 4}<small>Få kvar</small>{/if}</a
 	>
 	<div class="product-copy">
 		<p class="eyebrow">{product.category}</p>
