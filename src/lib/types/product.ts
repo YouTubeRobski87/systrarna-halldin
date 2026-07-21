@@ -1,4 +1,4 @@
-export type Category = 'Armband' | 'Nyckelringar' | 'Squishies' | 'Övrigt';
+export type Category = 'Nyckelringar';
 
 export interface Product {
 	id: string;
@@ -10,9 +10,7 @@ export interface Product {
 	category: Category;
 	image: string;
 	imageAlt: string;
-	imageWidth?: number;
-	imageHeight?: number;
-	stock?: number;
+	imageWidth: number;
+	imageHeight: number;
 	featured: boolean;
-	colors?: string[];
 }

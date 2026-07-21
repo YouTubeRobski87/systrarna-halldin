@@ -7,11 +7,7 @@
 	import ProductGrid from '$lib/components/ProductGrid.svelte';
 	let { data }: { data: PageData } = $props();
 	let quantity = $state(1);
-	let variation = $state('');
 	let added = $state(false);
-	$effect(() => {
-		if (!variation) variation = data.product.colors?.[0] ?? '';
-	});
 	let structuredData = $derived(
 		JSON.stringify({
 			'@context': 'https://schema.org',
@@ -21,14 +17,7 @@
 			offers: {
 				'@type': 'Offer',
 				price: data.product.price,
-				priceCurrency: 'SEK',
-				...(data.product.stock !== undefined
-					? {
-							availability: data.product.stock
-								? 'https://schema.org/InStock'
-								: 'https://schema.org/OutOfStock'
-						}
-					: {})
+				priceCurrency: 'SEK'
 			}
 		})
 	);
@@ -38,7 +27,7 @@
 			.slice(0, 3)
 	);
 	function add() {
-		addToCart(data.product, variation || undefined, quantity);
+		addToCart(data.product, undefined, quantity);
 		added = true;
 		setTimeout(() => (added = false), 1800);
 	}
@@ -57,43 +46,22 @@
 	<a class="back-link" href="/butik">← Tillbaka till butiken</a>
 	<section class="product-detail">
 		<div class="detail-image">
-			{#if data.product.image.startsWith('/')}
-				<img
-					src={data.product.image}
-					alt={data.product.imageAlt}
-					width={data.product.imageWidth}
-					height={data.product.imageHeight}
-				/>
-			{:else}
-				<span>{data.product.image}</span>
-			{/if}
+			<img
+				src={data.product.image}
+				alt={data.product.imageAlt}
+				width={data.product.imageWidth}
+				height={data.product.imageHeight}
+			/>
 		</div>
 		<div class="detail-copy">
 			<p class="eyebrow">{data.product.category}</p>
 			<h1>{data.product.name}</h1>
 			<strong class="price">{currency(data.product.price)}</strong>
-			{#if data.product.stock !== undefined}<p
-					class:low-stock={data.product.stock < 4}
-					class="stock"
-				>
-					{data.product.stock < 4
-						? `Bara ${data.product.stock} kvar i lager`
-						: 'I lager – redo att skickas'}
-				</p>{/if}
 			<p class="description">{data.product.description}</p>
-			{#if data.product.colors}<fieldset class="variations">
-					<legend>Välj färg</legend>
-					<div>
-						{#each data.product.colors as color}<button
-								class:chosen={variation === color}
-								onclick={() => (variation = color)}>{color}</button
-							>{/each}
-					</div>
-				</fieldset>{/if}
 			<div class="purchase">
 				<QuantitySelector
 					value={quantity}
-					max={data.product.stock ?? 99}
+					max={99}
 					onChange={(value) => (quantity = value)}
 				/><button class="button" onclick={add}>Lägg i varukorgen →</button>
 			</div>

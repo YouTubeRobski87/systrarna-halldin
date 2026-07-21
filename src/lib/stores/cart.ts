@@ -1,10 +1,14 @@
 import { browser } from '$app/environment';
 import { derived, writable } from 'svelte/store';
+import { products } from '$lib/data/products';
 import type { Product } from '$lib/types/product';
 
 export type CartItem = { product: Product; quantity: number; variation?: string };
 const key = 'systrarna-halldin-cart';
-const initial: CartItem[] = browser ? JSON.parse(localStorage.getItem(key) ?? '[]') : [];
+const storedItems: CartItem[] = browser ? JSON.parse(localStorage.getItem(key) ?? '[]') : [];
+const initial = storedItems.filter((item) =>
+	products.some((product) => product.id === item.product?.id)
+);
 export const cart = writable<CartItem[]>(initial);
 if (browser) cart.subscribe((items) => localStorage.setItem(key, JSON.stringify(items)));
 export const cartCount = derived(cart, (items) =>
@@ -14,7 +18,7 @@ export const cartTotal = derived(cart, (items) =>
 	items.reduce((sum, item) => sum + item.product.price * item.quantity, 0)
 );
 export function addToCart(product: Product, variation?: string, quantity = 1) {
-	const maxQuantity = product.stock ?? 99;
+	const maxQuantity = 99;
 	cart.update((items) => {
 		const found = items.find(
 			(item) => item.product.id === product.id && item.variation === variation
@@ -34,7 +38,7 @@ export function updateQuantity(id: string, quantity: number, variation?: string)
 			? items.filter((item) => !(item.product.id === id && item.variation === variation))
 			: items.map((item) =>
 					item.product.id === id && item.variation === variation
-						? { ...item, quantity: Math.min(quantity, item.product.stock ?? 99) }
+						? { ...item, quantity: Math.min(quantity, 99) }
 						: item
 				)
 	);

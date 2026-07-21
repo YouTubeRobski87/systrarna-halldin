@@ -22,16 +22,14 @@
 	gap: 0.5rem;
 	flex-wrap: wrap;
 }
-.filters button,
-.variations button {
+.filters button {
 	border: 1px solid #e6dadd;
 	background: #fff;
 	padding: 0.5rem 0.85rem;
 	border-radius: 999px;
 	font-size: 0.84rem;
 }
-.filters button.active,
-.variations button.chosen {
+.filters button.active {
 	background: #3e3a55;
 	color: #fff;
 	border-color: #3e3a55;
@@ -82,30 +80,8 @@
 	font-size: 1.5rem;
 	margin: 1rem 0;
 }
-.stock {
-	color: #32836a;
-	font-size: 0.88rem;
-	font-weight: 600;
-}
-.stock.low-stock {
-	color: #ad5b64;
-}
 .description {
 	color: #655c60;
-}
-.variations {
-	border: 0;
-	padding: 0;
-	margin: 1.7rem 0;
-}
-.variations legend {
-	font-weight: 700;
-	margin-bottom: 0.7rem;
-}
-.variations div {
-	display: flex;
-	gap: 0.5rem;
-	flex-wrap: wrap;
 }
 .purchase {
 	display: flex;
@@ -539,9 +515,6 @@ footer a:hover {
 	.hero-art {
 		min-height: 330px;
 	}
-	.beads {
-		font-size: 3.5rem;
-	}
 	.section,
 	.page {
 		padding: 3.7rem 1.25rem;
@@ -927,27 +900,6 @@ nav {
 	right: 20%;
 	font-size: 3rem;
 	color: #efb36c;
-}
-.beads {
-	z-index: 1;
-	font-size: 4.8rem;
-	line-height: 0.8;
-	letter-spacing: 0.17em;
-	color: #f0abbd;
-	text-shadow: 6px 7px #d4b0d1;
-	transform: rotate(-9deg);
-}
-.beads b {
-	color: #e6819d;
-}
-.bracelet {
-	position: absolute;
-	font-size: 2rem;
-	letter-spacing: 0.2em;
-	color: #f1cc70;
-	bottom: 24%;
-	left: 22%;
-	transform: rotate(22deg);
 }
 .hero-art p {
 	position: absolute;

@@ -1,6 +1,5 @@
 <script lang="ts">
 	import Hero from '$lib/components/Hero.svelte';
-	import CategoryCard from '$lib/components/CategoryCard.svelte';
 	import ProductGrid from '$lib/components/ProductGrid.svelte';
 	import TrustBar from '$lib/components/TrustBar.svelte';
 	import { products } from '$lib/data/products';
@@ -17,7 +16,7 @@
 <svelte:head
 	><title>Systrarna Halldin – Handgjort av Alma & Emilia</title><meta
 		name="description"
-		content="Handgjorda armband, nyckelringar och små favoriter av Alma & Emilia."
+		content="Handgjorda nyckelringar och små favoriter av Alma & Emilia."
 	/><link rel="canonical" href="https://systrarnahalldin.se/" /><meta
 		property="og:title"
 		content="Systrarna Halldin"
@@ -28,26 +27,6 @@
 >
 <Hero />
 <main>
-	<section class="section">
-		<div class="section-heading centered">
-			<p class="eyebrow">Hitta din favorit</p>
-			<h2>Små saker att tycka om</h2>
-			<p>Varje sak är vald eller skapad med extra omsorg.</p>
-		</div>
-		<div class="category-grid">
-			<CategoryCard
-				name="Armband"
-				icon="◌"
-				text="Pärlor, färg och glädje"
-				color="pink"
-			/><CategoryCard
-				name="Nyckelringar"
-				icon="✦"
-				text="Till nycklar och väskor"
-				color="mint"
-			/><CategoryCard name="Squishies" icon="●" text="Mjuka små favoriter" color="lavender" />
-		</div>
-	</section>
 	<section class="section featured">
 		<ProductGrid items={featured} title="Utvalt just nu" /><a
 			class="text-link all-link"
@@ -60,8 +39,8 @@
 			<p class="eyebrow">Från vår lilla verkstad</p>
 			<h2>Skapat av oss</h2>
 			<p>
-				Systrarna Halldin är vår lilla butik med handgjorda armband, nyckelringar och andra saker vi
-				själva tycker om att skapa.
+				Systrarna Halldin är vår lilla butik med handgjorda nyckelringar och andra saker vi själva
+				tycker om att skapa.
 			</p>
 		</div>
 		<div class="signature-cards">

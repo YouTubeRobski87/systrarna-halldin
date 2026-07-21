@@ -16,14 +16,12 @@
 			<section class="cart-list large">
 				{#each $cart as item (`${item.product.id}-${item.variation}`)}<article class="cart-item">
 						<span class="mini-image"
-							>{#if item.product.image.startsWith('/')}
-								<img
-									src={item.product.image}
-									alt={item.product.imageAlt}
-									width={item.product.imageWidth}
-									height={item.product.imageHeight}
-								/>
-							{:else}{item.product.image}{/if}</span
+							><img
+								src={item.product.image}
+								alt={item.product.imageAlt}
+								width={item.product.imageWidth}
+								height={item.product.imageHeight}
+							/></span
 						>
 						<div class="cart-product">
 							<h2>{item.product.name}</h2>

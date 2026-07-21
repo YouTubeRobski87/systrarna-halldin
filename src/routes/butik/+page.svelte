@@ -1,8 +1,17 @@
 <script lang="ts">
+	import { goto } from '$app/navigation';
+	import { page } from '$app/state';
 	import ProductGrid from '$lib/components/ProductGrid.svelte';
 	import { categories, products } from '$lib/data/products';
 	import type { Category } from '$lib/types/product';
-	let selected = $state<string>('Alla');
+	const isShopCategory = (value: string | null): value is (typeof categories)[number] =>
+		value !== null && categories.includes(value as (typeof categories)[number]);
+	const selected = $derived.by(() => {
+		const category = page.url.searchParams.get('kategori');
+		return isShopCategory(category) ? category : 'Alla';
+	});
+	const selectCategory = (category: (typeof categories)[number]) =>
+		goto(category === 'Alla' ? '/butik' : `/butik?kategori=${encodeURIComponent(category)}`);
 	let sort = $state('featured');
 	let filtered = $derived(
 		products
@@ -22,7 +31,7 @@
 <svelte:head
 	><title>Butik – Systrarna Halldin</title><meta
 		name="description"
-		content="Shoppa handgjorda armband, nyckelringar och squishies."
+		content="Shoppa handgjorda nyckelringar av Alma och Emilia."
 	/><link rel="canonical" href="https://systrarnahalldin.se/butik" /></svelte:head
 >
 <main class="page">
@@ -33,7 +42,7 @@
 		<div class="filters" aria-label="Filtrera kategori">
 			{#each categories as category}<button
 					class:active={selected === category}
-					onclick={() => (selected = category)}>{category}</button
+					onclick={() => selectCategory(category)}>{category}</button
 				>{/each}
 		</div>
 		<label class="sort"
