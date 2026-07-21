@@ -45,4 +45,34 @@ export function updateQuantity(id: string, quantity: number, bonusBead?: BonusBe
 				)
 	);
 }
+
+export function updateBonusBead(
+	id: string,
+	currentBonusBead: BonusBead | undefined,
+	bonusBead: BonusBead
+) {
+	if (currentBonusBead === bonusBead) return;
+
+	cart.update((items) => {
+		const currentItem = items.find(
+			(item) => item.product.id === id && item.bonusBead === currentBonusBead
+		);
+		if (!currentItem) return items;
+
+		const matchingItem = items.find(
+			(item) => item.product.id === id && item.bonusBead === bonusBead
+		);
+		if (matchingItem) {
+			return items
+				.filter((item) => item !== currentItem)
+				.map((item) =>
+					item === matchingItem
+						? { ...item, quantity: Math.min(item.quantity + currentItem.quantity, 99) }
+						: item
+				);
+		}
+
+		return items.map((item) => (item === currentItem ? { ...item, bonusBead } : item));
+	});
+}
 export const clearCart = () => cart.set([]);

@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { SWISH_NUMBER, isSwishConfigured } from '$lib/config/payment';
-	import { cart, cartTotal, clearCart, type CartItem } from '$lib/stores/cart';
+	import { cart, cartTotal, clearCart, updateBonusBead, type CartItem } from '$lib/stores/cart';
+	import { bonusBeads, hasBonusBeadOffer, type BonusBead } from '$lib/types/product';
 	import { createOrderNumber, PENDING_PAYMENT_STATUS, type SubmittedOrder } from '$lib/utils/order';
 	import { currency } from '$lib/utils/currency';
 
@@ -134,11 +135,29 @@
 	{:else if $cart.length}
 		{#each $cart as item (`${item.product.id}-${item.bonusBead}`)}
 			<div>
-				<span
-					>{item.quantity} × {item.product.name}{#if item.bonusBead}<small
-							>Bonuspärla: {item.bonusBead}</small
-						>{/if}</span
-				>
+				<span>
+					{item.quantity} × {item.product.name}
+					{#if hasBonusBeadOffer(item.product.category)}
+						<label
+							class="bonus-select compact"
+							for={`checkout-bonus-${item.product.id}-${item.bonusBead}`}
+						>
+							<span>Bonuspärla:</span>
+							<select
+								id={`checkout-bonus-${item.product.id}-${item.bonusBead}`}
+								value={item.bonusBead ?? bonusBeads[0]}
+								onchange={(event) =>
+									updateBonusBead(
+										item.product.id,
+										item.bonusBead,
+										(event.currentTarget as HTMLSelectElement).value as BonusBead
+									)}
+							>
+								{#each bonusBeads as bead}<option value={bead}>{bead}</option>{/each}
+							</select>
+						</label>
+					{/if}
+				</span>
 				<b>{currency(item.product.price * item.quantity)}</b>
 			</div>
 		{/each}

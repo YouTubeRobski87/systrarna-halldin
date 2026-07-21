@@ -294,6 +294,32 @@
 	font-size: 0.76rem;
 	color: #756b70;
 }
+.bonus-select {
+	display: flex;
+	align-items: center;
+	gap: 0.45rem;
+	margin-top: 0.45rem;
+	font-size: 0.8rem;
+	font-weight: 600;
+	color: #655c60;
+}
+.bonus-select select {
+	min-width: 0;
+	max-width: 100%;
+	border: 1px solid #ded4d6;
+	border-radius: 8px;
+	background: #fffdfb;
+	padding: 0.35rem 1.7rem 0.35rem 0.5rem;
+	font-size: 0.82rem;
+	color: #373133;
+}
+.bonus-select.compact {
+	font-size: 0.75rem;
+}
+.bonus-select.compact select {
+	max-width: 150px;
+	font-size: 0.76rem;
+}
 .cart-item .inline-qty {
 	margin-top: 0.35rem;
 	width: max-content;

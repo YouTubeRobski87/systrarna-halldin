@@ -1,5 +1,6 @@
 <script lang="ts">
-	import { cart, cartTotal, updateQuantity } from '$lib/stores/cart';
+	import { cart, cartTotal, updateBonusBead, updateQuantity } from '$lib/stores/cart';
+	import { bonusBeads, hasBonusBeadOffer, type BonusBead } from '$lib/types/product';
 	import { currency } from '$lib/utils/currency';
 </script>
 
@@ -25,9 +26,24 @@
 						>
 						<div class="cart-product">
 							<h2>{item.product.name}</h2>
-							{#if item.bonusBead}<p>Bonuspärla: {item.bonusBead}</p>{/if}<b
-								>{currency(item.product.price)}</b
-							>
+							{#if hasBonusBeadOffer(item.product.category)}
+								<label class="bonus-select" for={`cart-bonus-${item.product.id}-${item.bonusBead}`}>
+									<span>Bonuspärla</span>
+									<select
+										id={`cart-bonus-${item.product.id}-${item.bonusBead}`}
+										value={item.bonusBead ?? bonusBeads[0]}
+										onchange={(event) =>
+											updateBonusBead(
+												item.product.id,
+												item.bonusBead,
+												(event.currentTarget as HTMLSelectElement).value as BonusBead
+											)}
+									>
+										{#each bonusBeads as bead}<option value={bead}>{bead}</option>{/each}
+									</select>
+								</label>
+							{/if}
+							<b>{currency(item.product.price)}</b>
 						</div>
 						<div class="inline-qty">
 							<button
