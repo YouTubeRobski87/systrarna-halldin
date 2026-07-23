@@ -15,7 +15,11 @@ export const actions: Actions = {
 		if (!parsed.success || !validAdminPassword(parsed.data.password)) {
 			return fail(401, { message: 'Fel lösenord.' });
 		}
-		cookies.set(ADMIN_COOKIE, createAdminSession(), adminCookieOptions(url.protocol === 'https:'));
+		cookies.set(
+			ADMIN_COOKIE,
+			createAdminSession(),
+			adminCookieOptions(url.protocol === 'https:' || process.env.NODE_ENV === 'production')
+		);
 		redirect(303, '/admin/orders');
 	}
 };
