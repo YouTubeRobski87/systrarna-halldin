@@ -1,4 +1,6 @@
-export type Category = 'Armband' | 'Nyckelringar';
+import type { CreativeCategory } from '$lib/data/creative-gallery';
+
+export type Category = CreativeCategory;
 export type MadeBy = 'Alma' | 'Emilia';
 export const bonusBeads = [
 	'Överraska mig',

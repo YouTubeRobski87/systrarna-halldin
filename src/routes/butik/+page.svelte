@@ -2,8 +2,7 @@
 	import { goto } from '$app/navigation';
 	import { page } from '$app/state';
 	import ProductGrid from '$lib/components/ProductGrid.svelte';
-	import { categories, products } from '$lib/data/products';
-	import type { Category } from '$lib/types/product';
+	import { categories, products, type ShopCategory } from '$lib/data/products';
 	const isShopCategory = (value: string | null): value is (typeof categories)[number] =>
 		value !== null && categories.includes(value as (typeof categories)[number]);
 	const selected = $derived.by(() => {
@@ -15,7 +14,7 @@
 	let sort = $state('featured');
 	let filtered = $derived(
 		products
-			.filter((p) => selected === 'Alla' || p.category === (selected as Category))
+			.filter((p) => selected === 'Alla' || p.category === (selected as ShopCategory))
 			.toSorted((a, b) =>
 				sort === 'price-low'
 					? a.price - b.price

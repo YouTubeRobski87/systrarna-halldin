@@ -1,245 +1,31 @@
+import {
+	creativeCategories,
+	creativeGalleryProducts,
+	type CreativeCategory
+} from '$lib/data/creative-gallery';
 import type { Product } from '$lib/types/product';
 
-export const products: Product[] = [
-	{
-		id: 'green-bead-keyring',
-		slug: 'gron-parl-nyckelring',
-		name: 'Grön pärlnyckelring',
-		shortDescription: 'En nyckelring i gröna toner.',
-		description: 'En grön pärlnyckelring som ger nycklarna en personlig detalj.',
-		price: 15,
-		category: 'Nyckelringar',
-		image: '/images/produkter/original/nyckelringar/gron-parl-nyckelring-01.jpg',
-		imageAlt: 'Grön pärlnyckelring',
-		imageWidth: 1536,
-		imageHeight: 2048,
-		featured: true
-	},
-	{
-		id: 'rainbow-bead-keyring',
-		slug: 'regnbage-parl-nyckelring',
-		name: 'Regnbågspärlnyckelring',
-		shortDescription: 'En nyckelring med regnbågsfärger.',
-		description: 'En färgglad nyckelring som är lätt att känna igen bland nycklarna.',
-		price: 15,
-		category: 'Nyckelringar',
-		image: '/images/produkter/original/nyckelringar/regnbage-parl-nyckelring-01.jpg',
-		imageAlt: 'Regnbågspärlnyckelring',
-		imageWidth: 1536,
-		imageHeight: 2048,
-		featured: true
-	},
-	{
-		id: 'pink-bead-keyring',
-		slug: 'rosa-parl-nyckelring',
-		name: 'Rosa pärlnyckelring',
-		shortDescription: 'En nyckelring i rosa toner.',
-		description: 'En rosa pärlnyckelring som passar på nyckelknippan eller väskan.',
-		price: 15,
-		category: 'Nyckelringar',
-		image: '/images/produkter/original/nyckelringar/rosa-parl-nyckelring-01.jpg',
-		imageAlt: 'Rosa pärlnyckelring',
-		imageWidth: 1536,
-		imageHeight: 2048,
-		featured: false
-	},
-	{
-		id: 'orange-bead-keyring',
-		slug: 'orange-parl-nyckelring',
-		name: 'Orange pärlnyckelring',
-		shortDescription: 'En nyckelring i orange toner.',
-		description: 'En orange pärlnyckelring som gör nycklarna lite enklare att hitta.',
-		price: 15,
-		category: 'Nyckelringar',
-		image: '/images/produkter/original/nyckelringar/orange-parl-nyckelring-01.jpg',
-		imageAlt: 'Orange pärlnyckelring',
-		imageWidth: 1536,
-		imageHeight: 2048,
-		featured: false
-	},
-	{
-		id: 'purple-moon-keyring',
-		slug: 'lila-mane-nyckelring',
-		name: 'Lila måne-nyckelring',
-		shortDescription: 'En nyckelring med en lila måne.',
-		description: 'En nyckelring med en lila måndetalj och färg som syns fint.',
-		price: 15,
-		category: 'Nyckelringar',
-		image: '/images/produkter/original/nyckelringar/lila-mane-nyckelring-01.jpg',
-		imageAlt: 'Lila måne-nyckelring',
-		imageWidth: 1536,
-		imageHeight: 2048,
-		featured: false
-	},
-	{
-		id: 'red-moon-keyring',
-		slug: 'rod-mane-nyckelring',
-		name: 'Röd måne-nyckelring',
-		shortDescription: 'En nyckelring med en röd måne.',
-		description: 'En nyckelring med en röd måndetalj som ger en tydlig färgklick.',
-		price: 15,
-		category: 'Nyckelringar',
-		image: '/images/produkter/original/nyckelringar/rod-mane-nyckelring-01.jpg',
-		imageAlt: 'Röd måne-nyckelring',
-		imageWidth: 1536,
-		imageHeight: 2048,
-		featured: false
-	},
-	{
-		id: 'rainbow-keyring',
-		slug: 'regnbage-nyckelring',
-		name: 'Regnbågsnyckelring',
-		shortDescription: 'En nyckelring med regnbågsmotiv.',
-		description: 'En färgstark nyckelring med ett regnbågsmotiv.',
-		price: 15,
-		category: 'Nyckelringar',
-		image: '/images/produkter/original/nyckelringar/regnbage-nyckelring-01.jpg',
-		imageAlt: 'Regnbågsnyckelring',
-		imageWidth: 1536,
-		imageHeight: 2048,
-		featured: false
-	},
-	{
-		id: 'bee-keyring',
-		slug: 'bi-nyckelring',
-		name: 'Bi-nyckelring',
-		shortDescription: 'En liten nyckelring med bi-motiv.',
-		description: 'En nyckelring med ett bi-motiv som blir en glad detalj på nycklarna.',
-		price: 15,
-		category: 'Nyckelringar',
-		image: '/images/produkter/original/nyckelringar/bi-nyckelring-01.jpg',
-		imageAlt: 'Bi-nyckelring',
-		imageWidth: 1536,
-		imageHeight: 2048,
-		featured: false
-	},
-	{
-		id: 'pink-bead-keyring-two',
-		slug: 'rosa-parl-nyckelring-2',
-		name: 'Rosa pärlnyckelring II',
-		shortDescription: 'En rosa nyckelring i en annan variant.',
-		description: 'En rosa pärlnyckelring i ytterligare en variant för nyckelknippan.',
-		price: 15,
-		category: 'Nyckelringar',
-		image: '/images/produkter/original/nyckelringar/rosa-parl-nyckelring-02.jpg',
-		imageAlt: 'Rosa pärlnyckelring i en annan variant',
-		imageWidth: 2250,
-		imageHeight: 3000,
-		featured: false
-	},
-	{
-		id: 'blue-bead-keyring',
-		slug: 'bla-parl-nyckelring',
-		name: 'Blå pärlnyckelring',
-		shortDescription: 'En nyckelring i blå toner.',
-		description: 'En blå pärlnyckelring som ger nycklarna en tydlig färgdetalj.',
-		price: 15,
-		category: 'Nyckelringar',
-		image: '/images/produkter/original/nyckelringar/bla-parl-nyckelring-01.jpg',
-		imageAlt: 'Blå pärlnyckelring',
-		imageWidth: 1536,
-		imageHeight: 2048,
-		featured: false
-	},
-	{
-		id: 'purple-bead-keyring',
-		slug: 'lila-parl-nyckelring',
-		name: 'Lila pärlnyckelring',
-		shortDescription: 'En nyckelring i lila toner.',
-		description: 'En lila pärlnyckelring som gör nyckelknippan mer personlig.',
-		price: 15,
-		category: 'Nyckelringar',
-		image: '/images/produkter/original/nyckelringar/lila-parl-nyckelring-01.jpg',
-		imageAlt: 'Lila pärlnyckelring',
-		imageWidth: 1536,
-		imageHeight: 2048,
-		featured: false
-	},
-	{
-		id: 'pink-bead-bracelet',
-		slug: 'rosa-parlarmband',
-		name: 'Rosa pärlarmband',
-		shortDescription: 'Ett armband i rosa toner.',
-		description: 'Ett rosa pärlarmband som blir en färgglad detalj på handleden.',
-		price: 20,
-		category: 'Armband',
-		image: '/images/produkter/original/armband/rosa-parlarmband-01.jpg',
-		imageAlt: 'Rosa pärlarmband',
-		imageWidth: 1536,
-		imageHeight: 2048,
-		featured: true
-	},
-	{
-		id: 'cerise-bead-bracelet',
-		slug: 'cerise-parlarmband',
-		name: 'Cerise pärlarmband',
-		shortDescription: 'Ett armband i cerise toner.',
-		description: 'Ett cerise pärlarmband som ger en tydlig färgklick.',
-		price: 20,
-		category: 'Armband',
-		image: '/images/produkter/original/armband/cerise-parlarmband-01.jpg',
-		imageAlt: 'Cerise pärlarmband',
-		imageWidth: 2250,
-		imageHeight: 3000,
-		featured: true
-	},
-	{
-		id: 'rainbow-bracelet',
-		slug: 'regnbagsarmband',
-		name: 'Regnbågsarmband',
-		shortDescription: 'Ett armband med regnbågsfärger.',
-		description: 'Ett färgglatt armband med regnbågsfärger.',
-		price: 20,
-		category: 'Armband',
-		image: '/images/produkter/original/armband/regnbagsarmband-01.jpg',
-		imageAlt: 'Regnbågsarmband',
-		imageWidth: 1536,
-		imageHeight: 2048,
-		featured: false
-	},
-	{
-		id: 'sunshine-bracelet',
-		slug: 'solskensarmband',
-		name: 'Solskensarmband',
-		shortDescription: 'Ett armband i soliga färger.',
-		description: 'Ett armband med varma, soliga färger.',
-		price: 20,
-		category: 'Armband',
-		image: '/images/produkter/original/armband/solsken-armband-01.jpg',
-		imageAlt: 'Solskensarmband',
-		imageWidth: 1536,
-		imageHeight: 2048,
-		featured: false
-	},
-	{
-		id: 'purple-bead-bracelet',
-		slug: 'lila-parlarmband',
-		name: 'Lila pärlarmband',
-		shortDescription: 'Ett armband i lila toner.',
-		description: 'Ett lila pärlarmband med en mjuk färgton.',
-		price: 20,
-		category: 'Armband',
-		image: '/images/produkter/original/armband/lila-parlarmband-01.jpg',
-		imageAlt: 'Lila pärlarmband',
-		imageWidth: 1536,
-		imageHeight: 2048,
-		featured: false
-	},
-	{
-		id: 'purple-heart-bracelet',
-		slug: 'lila-hjartarmband',
-		name: 'Lila hjärtarmband',
-		shortDescription: 'Ett lila armband med hjärtdetalj.',
-		description: 'Ett lila armband med en hjärtdetalj.',
-		price: 20,
-		category: 'Armband',
-		image: '/images/produkter/original/armband/lila-hjartarmband-01.jpg',
-		imageAlt: 'Lila hjärtarmband',
-		imageWidth: 1536,
-		imageHeight: 2048,
-		featured: false
-	}
-];
+/**
+ * Shop-ready representation of the gallery catalogue. Keeping this as an
+ * adapter means the gallery remains the single source of truth for products,
+ * categories, prices, and image paths.
+ */
+export const products: Product[] = creativeGalleryProducts.map((product) => ({
+	id: product.id,
+	slug: product.id,
+	name: product.title,
+	shortDescription: product.description,
+	description: product.description,
+	price: product.price ?? 0,
+	category: product.category,
+	image: product.image,
+	imageAlt: product.alt,
+	imageWidth: product.imageWidth,
+	imageHeight: product.imageHeight,
+	featured: product.featured
+}));
 
-export const categories = ['Alla', 'Armband', 'Nyckelringar'] as const;
+export const categories = ['Alla', ...creativeCategories] as const;
+export type ShopCategory = 'Alla' | CreativeCategory;
+
 export const getProduct = (slug: string) => products.find((product) => product.slug === slug);
