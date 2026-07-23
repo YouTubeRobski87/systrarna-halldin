@@ -4,7 +4,10 @@ import { env } from '$env/dynamic/private';
 export const ADMIN_COOKIE = 'sh_admin_session';
 const SESSION_MAX_AGE = 60 * 60 * 8;
 
-const signature = (value: string) => createHmac('sha256', env.ADMIN_PASSWORD ?? '').update(value).digest('base64url');
+const signature = (value: string) =>
+	createHmac('sha256', env.ADMIN_PASSWORD ?? '')
+		.update(value)
+		.digest('base64url');
 
 export function validAdminPassword(value: string) {
 	if (!env.ADMIN_PASSWORD) return false;

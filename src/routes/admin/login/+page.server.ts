@@ -1,6 +1,11 @@
 import { fail, redirect, type Actions } from '@sveltejs/kit';
 import { z } from 'zod';
-import { ADMIN_COOKIE, adminCookieOptions, createAdminSession, validAdminPassword } from '$lib/server/admin-auth';
+import {
+	ADMIN_COOKIE,
+	adminCookieOptions,
+	createAdminSession,
+	validAdminPassword
+} from '$lib/server/admin-auth';
 
 const loginSchema = z.object({ password: z.string().min(1).max(1024) });
 
