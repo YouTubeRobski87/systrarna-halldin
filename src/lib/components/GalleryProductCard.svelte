@@ -24,9 +24,12 @@
 	<div class="gallery-product-copy">
 		<div class="gallery-product-meta">
 			<p class="eyebrow">{product.category}</p>
-			<span class={`gallery-status gallery-status-${product.status}`}
-				>{getGalleryStatusLabel(product.status)}</span
-			>
+			<div class="gallery-product-badges">
+				{#if product.isNew}<span class="gallery-new">Nyinkommen</span>{/if}
+				<span class={`gallery-status gallery-status-${product.status}`}
+					>{getGalleryStatusLabel(product.status)}</span
+				>
+			</div>
 		</div>
 		<h2>{product.title}</h2>
 		<p>{product.description}</p>

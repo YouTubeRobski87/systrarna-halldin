@@ -21,10 +21,21 @@ export type GalleryProduct = {
 	creator: GalleryCreator;
 	status: GalleryStatus;
 	featured: boolean;
+	isNew: boolean;
 	image: string;
 	alt: string;
 	imageWidth: number;
 	imageHeight: number;
+};
+
+export const galleryPrices: Record<CreativeCategory, number> = {
+	Armband: 45,
+	Klistermärken: 20,
+	Nyckelringar: 55,
+	Övrigt: 40,
+	'Pappers-squishies': 65,
+	Pärlplattor: 50,
+	Suddgummi: 25
 };
 
 type GallerySource = {
@@ -171,10 +182,11 @@ export const creativeGalleryProducts: GalleryProduct[] = gallerySources.flatMap(
 			title,
 			category: source.category,
 			description: 'Handgjord skapelse av Alma och Emilia.',
-			price: null,
+			price: galleryPrices[source.category],
 			creator: null,
 			status: 'available',
 			featured: false,
+			isNew: true,
 			image: createImagePath(source.folder, fileName),
 			alt: `${title} – handgjord skapelse av Alma och Emilia`,
 			imageWidth: 1536,

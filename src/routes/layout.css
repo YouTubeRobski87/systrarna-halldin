@@ -1477,6 +1477,13 @@ main {
 	justify-content: space-between;
 	gap: 0.7rem;
 }
+.gallery-product-badges {
+	display: flex;
+	align-items: center;
+	justify-content: flex-end;
+	gap: 0.35rem;
+	flex-wrap: wrap;
+}
 .gallery-product-copy .eyebrow {
 	margin: 0;
 	font-size: 0.65rem;
@@ -1487,6 +1494,16 @@ main {
 	background: #edf7f2;
 	padding: 0.2rem 0.45rem;
 	color: #3f665d;
+	font-size: 0.67rem;
+	font-weight: 700;
+	white-space: nowrap;
+}
+.gallery-new {
+	border: 1px solid #e5c6a4;
+	border-radius: 999px;
+	background: #fff0df;
+	padding: 0.2rem 0.45rem;
+	color: #88563a;
 	font-size: 0.67rem;
 	font-weight: 700;
 	white-space: nowrap;
