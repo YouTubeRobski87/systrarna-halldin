@@ -25,6 +25,7 @@ revoke all on table public.orders from anon, authenticated;
 create or replace function public.set_orders_updated_at()
 returns trigger
 language plpgsql
+set search_path = pg_catalog
 as $$
 begin
   new.updated_at = now();
