@@ -24,11 +24,25 @@ Orderdata sparas enbart via en Supabase-klient på servern. Ingen service role-n
 SUPABASE_URL=https://<project-ref>.supabase.co
 SUPABASE_SERVICE_ROLE_KEY=<Supabase secret/service_role key>
 ADMIN_PASSWORD=<ett långt, unikt lösenord>
+RESEND_API_KEY=<Resend API-nyckel med sending access>
+ORDER_EMAIL_FROM=Systrarna Halldin <butik@systrarnahalldin.se>
+ORDER_REPLY_TO=butik@systrarnahalldin.se
 ```
 
 `SUPABASE_SERVICE_ROLE_KEY` är endast för servern och får aldrig prefixet `PUBLIC_`. SQL-migreringen skapar tabellen `orders`, aktiverar RLS och ger inte `anon` eller `authenticated` åtkomst till kunddata. Den ändrar inga befintliga tabeller.
 
 I Render: öppna tjänsten, välj **Environment**, lägg in de tre variablerna ovan och gör en ny deploy. Sätt ett långt slumpmässigt värde för `ADMIN_PASSWORD`; när det ändras loggas befintliga admins ut automatiskt.
+
+## Kundmejl med Resend
+
+Kundmejl skickas endast från servern. När `RESEND_API_KEY` inte är satt sparas ordern fortfarande, men inget mejl skickas.
+
+1. Skapa ett Resend-konto och verifiera domänen `systrarnahalldin.se` med DNS-posterna Resend visar.
+2. Skapa en API-nyckel med behörigheten **Sending access**.
+3. Lägg in `RESEND_API_KEY`, `ORDER_EMAIL_FROM` och `ORDER_REPLY_TO` i Render.
+4. Deploya om tjänsten.
+
+Systemet skickar en orderbekräftelse efter en sparad checkout och ett statusmejl när admin ändrar betal- eller orderstatus. Resend kan skicka från `butik@systrarnahalldin.se` när domänen är verifierad. API-nyckeln får aldrig ligga i klientkod eller delas i chatten.
 
 ## Admin och Swish
 

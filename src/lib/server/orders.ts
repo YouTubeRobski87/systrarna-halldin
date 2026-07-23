@@ -118,12 +118,12 @@ export async function createOrder(input: unknown) {
 	const { data, error: databaseError } = await getSupabaseAdmin()
 		.from('orders')
 		.insert(order)
-		.select('id, order_number, total, payment_status, order_status')
+		.select('*')
 		.single();
 	if (databaseError || !data)
 		return { success: false as const, message: 'Kunde inte spara beställningen. Försök igen.' };
 
-	return { success: true as const, order: data };
+	return { success: true as const, order: data as OrderRecord };
 }
 
 export async function getOrder(id: string) {

@@ -1,4 +1,5 @@
 import { fail, type Actions } from '@sveltejs/kit';
+import { sendOrderConfirmation } from '$lib/server/order-email';
 import { createOrder } from '$lib/server/orders';
 
 export const actions: Actions = {
@@ -21,6 +22,7 @@ export const actions: Actions = {
 			items
 		});
 		if (!result.success) return fail(400, { message: result.message });
+		await sendOrderConfirmation(result.order);
 		return { order: result.order };
 	}
 };
