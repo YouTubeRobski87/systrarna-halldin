@@ -9,7 +9,14 @@
 		<h1>Logga in</h1>
 		<p>Hantera beställningar och matcha Swish-betalningar.</p>
 		<form method="POST" class="order-form">
-			<label>Lösenord<input name="password" type="password" autocomplete="current-password" required autofocus /></label>
+			<label
+				>Lösenord<input
+					name="password"
+					type="password"
+					autocomplete="current-password"
+					required
+				/></label
+			>
 			{#if form?.message}<p class="form-error" role="alert">{form.message}</p>{/if}
 			<button class="button" type="submit">Logga in</button>
 		</form>
