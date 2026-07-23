@@ -5,6 +5,7 @@
 	let drawer = $state(false);
 	const links = [
 		{ href: '/butik', label: 'Butik' },
+		{ href: '/galleri', label: 'Galleri' },
 		{ href: '/om', label: 'Om oss' },
 		{ href: '/kontakt', label: 'Kontakt' }
 	];
