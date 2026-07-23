@@ -15,7 +15,7 @@
 		<span>✉</span>
 		<div>
 			<h2>Kontakt för order och frågor</h2>
-			<a href="mailto:kontakt@systrarnahalldin.se">kontakt@systrarnahalldin.se</a>
+			<a href="mailto:butik@systrarnahalldin.se">butik@systrarnahalldin.se</a>
 			<p>
 				Kontaktuppgifter är platshållare innan lansering. Barnen hanterar inte kundkontakt själva.
 			</p>

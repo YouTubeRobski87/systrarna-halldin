@@ -37,6 +37,6 @@
 			behöver kompletteras före lansering.
 		</p>
 		<h2>Kontakt</h2>
-		<p>För frågor: kontakt@systrarnahalldin.se. Kundkontakt hanteras av ansvarig vuxen.</p>
+		<p>För frågor: butik@systrarnahalldin.se. Kundkontakt hanteras av ansvarig vuxen.</p>
 	</section>
 </main>

@@ -19,7 +19,7 @@
 	<div><b>Tryggt att handla</b><a href="/villkor">Köpvillkor</a><a href="/kontakt">Kontakt</a></div>
 	<div>
 		<b>Kontakt</b>
-		<p>kontakt@systrarnahalldin.se</p>
+		<p>butik@systrarnahalldin.se</p>
 		<small>Kontakt och order hanteras av ansvarig vuxen.</small>
 	</div>
 	<div class="footer-bottom">
