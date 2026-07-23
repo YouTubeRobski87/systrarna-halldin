@@ -2,7 +2,6 @@ export const creativeCategories = [
 	'Armband',
 	'Klistermärken',
 	'Nyckelringar',
-	'Övrigt',
 	'Pappers-squishies',
 	'Pärlplattor',
 	'Suddgummi'
@@ -32,7 +31,6 @@ export const galleryPrices: Record<CreativeCategory, number> = {
 	Armband: 45,
 	Klistermärken: 20,
 	Nyckelringar: 55,
-	Övrigt: 40,
 	'Pappers-squishies': 65,
 	Pärlplattor: 50,
 	Suddgummi: 25
@@ -44,6 +42,7 @@ type GallerySource = {
 	idPrefix: string;
 	titlePrefix: string;
 	files: string[];
+	additionalFiles?: { fileName: string; folder: string }[];
 };
 
 const gallerySources: GallerySource[] = [
@@ -77,6 +76,16 @@ const gallerySources: GallerySource[] = [
 			'8064357761(1).jpg',
 			'8064357851.jpg',
 			'8064358161(1).jpg'
+		],
+		additionalFiles: [
+			{ fileName: '8064161841.jpg', folder: 'ovrigt' },
+			{ fileName: '8064357221.jpg', folder: 'ovrigt' },
+			{ fileName: '8064357321.jpg', folder: 'ovrigt' },
+			{ fileName: '8064357571.jpg', folder: 'ovrigt' },
+			{ fileName: '8064357671.jpg', folder: 'ovrigt' },
+			{ fileName: '8064357761.jpg', folder: 'ovrigt' },
+			{ fileName: '8064357851(1).jpg', folder: 'ovrigt' },
+			{ fileName: '8064358161.jpg', folder: 'ovrigt' }
 		]
 	},
 	{
@@ -96,27 +105,6 @@ const gallerySources: GallerySource[] = [
 			'rod-mane-nyckelring-01.jpg',
 			'rosa-parl-nyckelring-01.jpg',
 			'rosa-parl-nyckelring-02.jpg'
-		]
-	},
-	{
-		category: 'Övrigt',
-		folder: 'ovrigt',
-		idPrefix: 'ovrigt',
-		titlePrefix: 'Övrigt',
-		files: [
-			'8063351171.jpg',
-			'8064160991.jpg',
-			'8064161841.jpg',
-			'8064163121.jpg',
-			'8064163651.jpg',
-			'8064164571.jpg',
-			'8064357221.jpg',
-			'8064357321.jpg',
-			'8064357571.jpg',
-			'8064357671.jpg',
-			'8064357761.jpg',
-			'8064357851(1).jpg',
-			'8064358161.jpg'
 		]
 	},
 	{
@@ -172,8 +160,13 @@ const gallerySources: GallerySource[] = [
 const createImagePath = (folder: string, fileName: string) =>
 	encodeURI(`/images/produkter/original/${folder}/${fileName}`);
 
-export const creativeGalleryProducts: GalleryProduct[] = gallerySources.flatMap((source) =>
-	source.files.map((fileName, index) => {
+export const creativeGalleryProducts: GalleryProduct[] = gallerySources.flatMap((source) => {
+	const files = [
+		...source.files.map((fileName) => ({ fileName, folder: source.folder })),
+		...(source.additionalFiles ?? [])
+	];
+
+	return files.map(({ fileName, folder }, index) => {
 		const number = String(index + 1).padStart(2, '0');
 		const title = `${source.titlePrefix} ${number}`;
 
@@ -187,10 +180,10 @@ export const creativeGalleryProducts: GalleryProduct[] = gallerySources.flatMap(
 			status: 'available',
 			featured: false,
 			isNew: true,
-			image: createImagePath(source.folder, fileName),
+			image: createImagePath(folder, fileName),
 			alt: `${title} – handgjord skapelse av Alma och Emilia`,
 			imageWidth: 1536,
 			imageHeight: 2048
 		};
-	})
-);
+	});
+});
