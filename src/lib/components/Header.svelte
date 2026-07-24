@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { cartCount } from '$lib/stores/cart';
+	import { FREE_SHIPPING_THRESHOLD } from '$lib/config/shipping';
 	import CartDrawer from './CartDrawer.svelte';
 	let open = $state(false);
 	let drawer = $state(false);
@@ -12,7 +13,7 @@
 </script>
 
 <header>
-	<div class="topline">Fri frakt på beställningar över 350 kr <span>♡</span></div>
+	<div class="topline">Fri frakt från {FREE_SHIPPING_THRESHOLD} kr <span>♡</span></div>
 	<nav>
 		<button
 			class="menu-toggle"

@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { cart, cartTotal, updateBonusBead, updateQuantity } from '$lib/stores/cart';
+	import { getShippingCost } from '$lib/config/shipping';
 	import { bonusBeads, hasBonusBeadOffer, type BonusBead } from '$lib/types/product';
 	import { currency } from '$lib/utils/currency';
 </script>
@@ -63,9 +64,17 @@
 			<aside class="cart-summary">
 				<h2>Sammanfattning</h2>
 				<div><span>Delsumma</span><b>{currency($cartTotal)}</b></div>
-				<div><span>Frakt</span><b>{$cartTotal >= 350 ? 'Gratis' : 'Beräknas vid order'}</b></div>
+				<div>
+					<span>Frakt</span><b
+						>{getShippingCost($cartTotal) === 0
+							? 'Gratis'
+							: currency(getShippingCost($cartTotal))}</b
+					>
+				</div>
 				<hr />
-				<div class="summary-total"><span>Totalt</span><strong>{currency($cartTotal)}</strong></div>
+				<div class="summary-total">
+					<span>Totalt</span><strong>{currency($cartTotal + getShippingCost($cartTotal))}</strong>
+				</div>
 				<a class="button full" href="/kassa">Till kassan →</a>
 				<p>Ingen betalning sker i detta steg.</p>
 			</aside>

@@ -81,9 +81,9 @@ export async function sendOrderConfirmation(order: OrderRecord) {
 <p>Swisha <strong>${formatCurrency(order.total)}</strong> till <strong>${escapeHtml(SWISH_NUMBER)}</strong> och skriv <strong>${escapeHtml(order.order_number)}</strong> som meddelande.</p>
 <p>Beställningen är inte betald förrän betalningen har mottagits och matchats mot ordernumret.</p>
 <h2>Din beställning</h2><ul>${items}</ul>
-<p><strong>Totalt: ${formatCurrency(order.total)}</strong></p>
+<p>Delsumma: ${formatCurrency(order.subtotal)}<br />Frakt: ${order.shipping_cost === 0 ? 'Gratis' : formatCurrency(order.shipping_cost)}<br /><strong>Totalt: ${formatCurrency(order.total)}</strong></p>
 <p>Har du frågor? Svara på detta mejl så hjälper vi dig.</p>`,
-		text: `Tack för din beställning, ${order.customer_name}!\n\nOrdernummer: ${order.order_number}\n\nSwisha ${formatCurrency(order.total)} till ${SWISH_NUMBER} och skriv ${order.order_number} som meddelande.\n\nDin beställning:\n${textItems}\n\nTotalt: ${formatCurrency(order.total)}\n\nHar du frågor? Svara på detta mejl så hjälper vi dig.`
+		text: `Tack för din beställning, ${order.customer_name}!\n\nOrdernummer: ${order.order_number}\n\nSwisha ${formatCurrency(order.total)} till ${SWISH_NUMBER} och skriv ${order.order_number} som meddelande.\n\nDin beställning:\n${textItems}\n\nDelsumma: ${formatCurrency(order.subtotal)}\nFrakt: ${order.shipping_cost === 0 ? 'Gratis' : formatCurrency(order.shipping_cost)}\nTotalt: ${formatCurrency(order.total)}\n\nHar du frågor? Svara på detta mejl så hjälper vi dig.`
 	});
 }
 

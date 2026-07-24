@@ -29,11 +29,11 @@ export type GalleryProduct = {
 
 export const galleryPrices: Record<CreativeCategory, number> = {
 	Armband: 45,
-	Klistermärken: 20,
+	Klistermärken: 10,
 	Nyckelringar: 55,
 	'Pappers-squishies': 65,
 	Pärlplattor: 50,
-	Suddgummi: 25
+	Suddgummi: 20
 };
 
 type GallerySource = {

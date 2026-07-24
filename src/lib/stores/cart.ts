@@ -6,11 +6,11 @@ import { bonusBeads, type BonusBead, type Product } from '$lib/types/product';
 export type CartItem = { product: Product; quantity: number; bonusBead?: BonusBead };
 const key = 'systrarna-halldin-cart';
 const storedItems: CartItem[] = browser ? JSON.parse(localStorage.getItem(key) ?? '[]') : [];
-const initial = storedItems.filter(
-	(item) =>
-		products.some((product) => product.id === item.product?.id) &&
-		(item.bonusBead === undefined || bonusBeads.includes(item.bonusBead))
-);
+const initial = storedItems.flatMap((item) => {
+	const product = products.find((candidate) => candidate.id === item.product?.id);
+	if (!product || (item.bonusBead !== undefined && !bonusBeads.includes(item.bonusBead))) return [];
+	return [{ ...item, product }];
+});
 export const cart = writable<CartItem[]>(initial);
 if (browser) cart.subscribe((items) => localStorage.setItem(key, JSON.stringify(items)));
 export const cartCount = derived(cart, (items) =>

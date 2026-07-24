@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { enhance } from '$app/forms';
 	import { SWISH_NUMBER, isSwishConfigured } from '$lib/config/payment';
+	import { getShippingCost } from '$lib/config/shipping';
 	import { cart, cartTotal, clearCart, updateBonusBead, type CartItem } from '$lib/stores/cart';
 	import { bonusBeads, hasBonusBeadOffer, type BonusBead } from '$lib/types/product';
 	import { currency } from '$lib/utils/currency';
@@ -150,8 +151,14 @@
 		{/each}
 		<hr />
 		<div><span>Delsumma</span><b>{currency($cartTotal)}</b></div>
-		<div><span>Frakt</span><b>0 kr</b></div>
-		<div class="summary-total"><span>Totalt</span><strong>{currency($cartTotal)}</strong></div>
+		<div>
+			<span>Frakt</span><b
+				>{getShippingCost($cartTotal) === 0 ? 'Gratis' : currency(getShippingCost($cartTotal))}</b
+			>
+		</div>
+		<div class="summary-total">
+			<span>Totalt</span><strong>{currency($cartTotal + getShippingCost($cartTotal))}</strong>
+		</div>
 		<p>Betalning sker efter skickad beställning via Swish.</p>
 	{:else}
 		<p>Din varukorg är tom.</p>

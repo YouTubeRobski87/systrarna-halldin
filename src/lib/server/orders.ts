@@ -1,5 +1,6 @@
 import { error } from '@sveltejs/kit';
 import { z } from 'zod';
+import { getShippingCost } from '$lib/config/shipping';
 import { products } from '$lib/data/products';
 import {
 	orderStatuses,
@@ -96,7 +97,7 @@ export async function createOrder(input: unknown) {
 	}
 
 	const subtotal = items.reduce((sum, item) => sum + item.price * item.quantity, 0);
-	const shippingCost = 0;
+	const shippingCost = getShippingCost(subtotal);
 	const order = {
 		order_number: newOrderNumber(),
 		customer_name: parsed.data.customerName,
