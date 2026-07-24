@@ -43,6 +43,7 @@ type GallerySource = {
 	titlePrefix: string;
 	files: string[];
 	additionalFiles?: { fileName: string; folder: string }[];
+	priceOverrides?: Record<string, number>;
 };
 
 const gallerySources: GallerySource[] = [
@@ -129,7 +130,12 @@ const gallerySources: GallerySource[] = [
 			'parlplatta-07.jpg',
 			'parlplatta-08.jpg',
 			'parlplatta-09.jpg'
-		]
+		],
+		priceOverrides: {
+			'parlplatta-03.jpg': 70,
+			'parlplatta-04.jpg': 70,
+			'parlplatta-05.jpg': 70
+		}
 	},
 	{
 		category: 'Suddgummi',
@@ -175,7 +181,7 @@ export const creativeGalleryProducts: GalleryProduct[] = gallerySources.flatMap(
 			title,
 			category: source.category,
 			description: 'Handgjord skapelse av Alma och Emilia.',
-			price: galleryPrices[source.category],
+			price: source.priceOverrides?.[fileName] ?? galleryPrices[source.category],
 			creator: null,
 			status: 'available',
 			featured: false,
