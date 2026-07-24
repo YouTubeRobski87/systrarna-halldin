@@ -134,7 +134,10 @@ const gallerySources: GallerySource[] = [
 		priceOverrides: {
 			'parlplatta-03.jpg': 70,
 			'parlplatta-04.jpg': 70,
-			'parlplatta-05.jpg': 70
+			'parlplatta-05.jpg': 70,
+			'parlplatta-07.jpg': 70,
+			'parlplatta-08.jpg': 70,
+			'parlplatta-09.jpg': 70
 		}
 	},
 	{
