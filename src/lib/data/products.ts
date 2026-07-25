@@ -22,7 +22,9 @@ export const products: Product[] = creativeGalleryProducts.map((product) => ({
 	imageAlt: product.alt,
 	imageWidth: product.imageWidth,
 	imageHeight: product.imageHeight,
-	featured: product.featured
+	featured: product.featured,
+	isNew: product.isNew,
+	status: product.status
 }));
 
 export const categories = ['Alla', ...creativeCategories] as const;

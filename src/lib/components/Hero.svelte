@@ -1,28 +1,42 @@
+<script lang="ts">
+	import { products } from '$lib/data/products';
+
+	const collage = [
+		products.find((product) => product.category === 'Armband'),
+		products.find((product) => product.category === 'Pärlplattor'),
+		products.find((product) => product.category === 'Nyckelringar'),
+		products.find((product) => product.category === 'Pappers-squishies')
+	].filter((product) => product !== undefined);
+</script>
+
 <section class="hero">
 	<div class="hero-copy">
-		<p class="eyebrow">Handgjort i små upplagor</p>
-		<h1>Små detaljer.<br /><i>Stor personlighet.</i></h1>
+		<p class="eyebrow">Alma & Emilias lilla verkstad</p>
+		<h1>Handgjort med <i>hjärta.</i></h1>
 		<p class="lead">
-			Armband, nyckelringar och färgglada favoriter, varsamt skapade av Alma & Emilia i vår lilla
-			verkstad.
+			Färgglada små ting att bära, ge bort och bli glad av — skapade för hand, ett exemplar i taget.
 		</p>
 		<div class="actions">
-			<a class="button" href="/butik">Upptäck butiken <span>→</span></a><a
-				class="text-link"
-				href="/om">Vår berättelse</a
-			>
+			<a class="button" href="/butik">Shoppa nu <span>→</span></a>
+			<a class="secondary-button" href="/galleri">Se galleriet</a>
 		</div>
+		<p class="hero-note"><span aria-hidden="true">✦</span> Små upplagor · skapade med fantasi</p>
 	</div>
-	<div class="hero-feature">
-		<img
-			src="/images/behind-the-scenes/parlor-och-material.jpg"
-			alt="Pärlor och material på Alma och Emilias arbetsbord"
-			width="1536"
-			height="2048"
-		/>
-		<div class="hero-feature-label">
-			<span>Från arbetsbordet</span>
-			<strong>Alma & Emilia</strong>
-		</div>
+
+	<div class="hero-collage" aria-label="Ett urval av handgjorda produkter">
+		<span class="collage-shape shape-peach" aria-hidden="true"></span>
+		<span class="collage-shape shape-lilac" aria-hidden="true"></span>
+		<span class="collage-sparkle sparkle-one" aria-hidden="true">✦</span>
+		<span class="collage-sparkle sparkle-two" aria-hidden="true">♡</span>
+		{#each collage as product, index (product.id)}
+			<a class={`collage-card collage-card-${index + 1}`} href={`/produkt/${product.slug}`}>
+				<img
+					src={product.image}
+					alt={product.imageAlt}
+					width={product.imageWidth}
+					height={product.imageHeight}
+				/>
+			</a>
+		{/each}
 	</div>
 </section>

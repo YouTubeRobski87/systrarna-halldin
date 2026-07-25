@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { page } from '$app/state';
 	import { cartCount } from '$lib/stores/cart';
 	import { FREE_SHIPPING_THRESHOLD } from '$lib/config/shipping';
 	import CartDrawer from './CartDrawer.svelte';
@@ -30,7 +31,10 @@
 				>{/if}</button
 		>
 		<div class:open class="nav-links">
-			{#each links as link}<a href={link.href} onclick={() => (open = false)}>{link.label}</a
+			{#each links as link}<a
+					class:active={page.url.pathname === link.href}
+					href={link.href}
+					onclick={() => (open = false)}>{link.label}</a
 				>{/each}
 		</div>
 	</nav>

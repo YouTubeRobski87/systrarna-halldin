@@ -30,5 +30,7 @@ export interface Product {
 	imageWidth: number;
 	imageHeight: number;
 	featured: boolean;
+	isNew?: boolean;
+	status?: 'available' | 'reserved' | 'sold' | 'not-for-sale';
 	madeBy?: MadeBy;
 }

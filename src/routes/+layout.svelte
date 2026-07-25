@@ -11,6 +11,9 @@
 	><link rel="icon" href={favicon} /><meta property="og:type" content="website" /><meta
 		property="og:locale"
 		content="sv_SE"
+	/><meta property="og:image" content="https://systrarnahalldin.se/og.png" /><meta
+		name="twitter:card"
+		content="summary_large_image"
 	/></svelte:head
 >
 <Header />
