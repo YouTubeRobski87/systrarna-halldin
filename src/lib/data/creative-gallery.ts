@@ -28,7 +28,7 @@ export type GalleryProduct = {
 };
 
 export const galleryPrices: Record<CreativeCategory, number> = {
-	Armband: 45,
+	Armband: 25,
 	Klistermärken: 10,
 	Nyckelringar: 55,
 	'Pappers-squishies': 65,
