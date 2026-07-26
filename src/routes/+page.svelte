@@ -9,9 +9,7 @@
 		.filter((product) => ['Armband', 'Pärlplattor'].includes(product.category))
 		.slice(0, 4);
 	const emiliaFavoriter = products
-		.filter((product) =>
-			['Nyckelringar', 'Pappers-squishies', 'Klistermärken'].includes(product.category)
-		)
+		.filter((product) => product.category === 'Nyckelringar')
 		.slice(0, 4);
 	const structuredData = JSON.stringify({
 		'@context': 'https://schema.org',
