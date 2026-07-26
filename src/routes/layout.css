@@ -2589,6 +2589,28 @@ h1 {
 	border-bottom: 1px solid var(--line);
 }
 
+.shop-search {
+	display: grid;
+	gap: 0.35rem;
+	min-width: min(100%, 235px);
+	color: #715d73;
+	font-size: 0.72rem;
+	font-weight: 800;
+}
+
+.shop-search input {
+	min-height: 42px;
+	border: 1px solid #dfc9d2;
+	border-radius: 999px;
+	background: #fffaf6;
+	padding: 0.65rem 0.9rem;
+	color: #493d55;
+}
+
+.shop-search input::placeholder {
+	color: #9d8c99;
+}
+
 .filters button,
 .creative-gallery-filters button {
 	border: 0;
@@ -2695,6 +2717,10 @@ footer {
 	.shop-controls {
 		align-items: stretch;
 		margin-top: 2rem;
+	}
+
+	.shop-search {
+		width: 100%;
 	}
 
 	.filters {

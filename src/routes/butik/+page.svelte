@@ -12,9 +12,17 @@
 	const selectCategory = (category: (typeof categories)[number]) =>
 		goto(category === 'Alla' ? '/butik' : `/butik?kategori=${encodeURIComponent(category)}`);
 	let sort = $state('featured');
+	let search = $state('');
 	let filtered = $derived(
 		products
-			.filter((p) => selected === 'Alla' || p.category === (selected as ShopCategory))
+			.filter(
+				(p) =>
+					(selected === 'Alla' || p.category === (selected as ShopCategory)) &&
+					(!search.trim() ||
+						`${p.name} ${p.category} ${p.description}`
+							.toLocaleLowerCase('sv-SE')
+							.includes(search.trim().toLocaleLowerCase('sv-SE')))
+			)
 			.toSorted((a, b) =>
 				sort === 'price-low'
 					? a.price - b.price
@@ -38,6 +46,14 @@
 	<h1>Hitta din favorit</h1>
 	<p class="intro">Små upplagor, handgjorda detaljer och massor av färg.</p>
 	<div class="shop-controls">
+		<label class="shop-search"
+			><span>Sök produkter</span><input
+				bind:value={search}
+				type="search"
+				placeholder="Sök till exempel stressboll"
+				aria-label="Sök produkter"
+			/></label
+		>
 		<div class="filters" aria-label="Filtrera kategori">
 			{#each categories as category}<button
 					class:active={selected === category}
