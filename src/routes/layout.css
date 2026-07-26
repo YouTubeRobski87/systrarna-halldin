@@ -3332,20 +3332,31 @@ h1 {
 }
 
 .product-image {
-	height: auto;
-	aspect-ratio: 0.95 / 1;
+	box-sizing: border-box;
+	height: 220px;
+	aspect-ratio: auto;
+	display: grid;
+	place-items: center;
+	overflow: hidden;
+	padding: 18px;
 }
 
 .product-image img,
 .detail-image img {
-	padding: 0.55rem;
+	max-height: 82%;
+	object-fit: contain;
+	object-position: center;
+	padding: 0;
 	transition: transform 260ms ease;
 }
 
 /* The source PNGs include generous transparent space above the stress balls. */
 .product-image.stress-ball-image img {
-	padding: 0;
-	transform: translateY(-10%) scale(1.5);
+	width: auto;
+	max-width: 100%;
+	height: 78%;
+	max-height: 78%;
+	transform: translateY(-8%);
 }
 
 .product-card:hover .product-image img {
@@ -3353,11 +3364,13 @@ h1 {
 }
 
 .product-card:hover .product-image.stress-ball-image img {
-	transform: translateY(-10%) scale(1.55);
+	transform: translateY(-8%) scale(1.02);
 }
 
 .product-copy {
-	padding: 1rem 0.25rem 0.2rem;
+	position: relative;
+	z-index: 1;
+	padding: 1.15rem 0.25rem 0.2rem;
 }
 
 .product-copy h3 {
