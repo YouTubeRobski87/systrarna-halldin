@@ -17,13 +17,15 @@
 >
 	<dialog class="gallery-lightbox" open aria-labelledby="lightbox-title">
 		<button class="gallery-lightbox-close" onclick={close} aria-label="Stäng stor bild">×</button>
-		<img
-			src={product.image}
-			alt={product.alt}
-			width={product.imageWidth}
-			height={product.imageHeight}
-		/>
-		<div>
+		<div class="gallery-lightbox-media">
+			<img
+				src={product.image}
+				alt={product.alt}
+				width={product.imageWidth}
+				height={product.imageHeight}
+			/>
+		</div>
+		<div class="gallery-lightbox-copy">
 			<p class="eyebrow">{product.category}</p>
 			<h2 id="lightbox-title">{product.title}</h2>
 		</div>
