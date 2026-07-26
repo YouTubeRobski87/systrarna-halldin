@@ -3342,8 +3342,18 @@ h1 {
 	transition: transform 260ms ease;
 }
 
+/* The source PNGs include generous transparent space above the stress balls. */
+.product-image.stress-ball-image img {
+	padding: 0;
+	transform: translateY(-10%) scale(1.5);
+}
+
 .product-card:hover .product-image img {
 	transform: scale(1.045);
+}
+
+.product-card:hover .product-image.stress-ball-image img {
+	transform: translateY(-10%) scale(1.55);
 }
 
 .product-copy {

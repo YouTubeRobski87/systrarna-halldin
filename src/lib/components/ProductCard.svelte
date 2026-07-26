@@ -13,7 +13,11 @@
 
 <article class="product-card">
 	{#if product.isNew}<span class="product-badge">Nytt</span>{/if}
-	<a href={`/produkt/${product.slug}`} class="product-image" aria-label={`Se ${product.name}`}
+	<a
+		href={`/produkt/${product.slug}`}
+		class="product-image"
+		class:stress-ball-image={product.category === 'Stressbollar'}
+		aria-label={`Se ${product.name}`}
 		><img
 			src={product.image}
 			alt={product.imageAlt}
