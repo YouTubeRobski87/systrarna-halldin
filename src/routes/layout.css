@@ -1844,6 +1844,19 @@ main {
 .gallery-lightbox .eyebrow {
 	margin-bottom: 0.5rem;
 }
+.gallery-lightbox-creator {
+	display: flex;
+	align-items: center;
+	gap: 0.4rem;
+	margin: 0.55rem 0 0;
+	color: #705f72;
+	font-size: 0.82rem;
+	font-weight: 700;
+}
+.gallery-lightbox-creator span {
+	color: #c36d8b;
+	font-size: 1rem;
+}
 .gallery-lightbox-close {
 	position: absolute;
 	top: 0.7rem;

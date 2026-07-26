@@ -28,6 +28,9 @@
 		<div class="gallery-lightbox-copy">
 			<p class="eyebrow">{product.category}</p>
 			<h2 id="lightbox-title">{product.title}</h2>
+			<p class="gallery-lightbox-creator">
+				<span aria-hidden="true">✦</span> Skapad av {product.creator ?? 'Alma & Emilia'}
+			</p>
 		</div>
 	</dialog>
 </div>
