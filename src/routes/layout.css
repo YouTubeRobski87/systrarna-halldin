@@ -1800,7 +1800,7 @@ main {
 	border: 0;
 	padding: 1rem;
 	border-radius: 24px;
-	background: #faf8f5;
+	background: radial-gradient(circle at 50% 35%, rgb(255 255 255 / 95%), transparent 48%), #faf6f2;
 	box-shadow: 0 18px 50px #1f182950;
 }
 
@@ -1812,9 +1812,19 @@ main {
 	overflow: hidden;
 	border-radius: 17px;
 	background:
-		radial-gradient(circle at 50% 42%, #fffdf9 0, #fffdf9 26%, transparent 62%),
-		linear-gradient(135deg, #f6eee8, #f3eee8);
+		radial-gradient(circle at 50% 42%, rgb(255 255 255 / 88%) 0, transparent 62%), #faf6f2;
 	box-shadow: inset 0 0 0 1px #e7dfd6;
+}
+
+.gallery-lightbox-accent {
+	position: absolute;
+	width: min(62%, 350px);
+	aspect-ratio: 1.28;
+	border-radius: 50%;
+	background: #e7c9d5;
+	opacity: 0.42;
+	transform: rotate(-12deg);
+	z-index: 0;
 }
 
 .gallery-lightbox-media img {
@@ -1828,7 +1838,31 @@ main {
 	padding: clamp(0.75rem, 2.5vw, 2rem);
 	box-sizing: border-box;
 	object-fit: contain;
-	filter: drop-shadow(0 14px 15px rgb(68 52 59 / 14%));
+	filter: drop-shadow(0 18px 28px rgb(62 45 53 / 16%));
+	z-index: 1;
+}
+
+.creator-badge {
+	position: absolute;
+	left: 1rem;
+	bottom: 1rem;
+	z-index: 2;
+	display: inline-flex;
+	align-items: center;
+	gap: 0.38rem;
+	border: 1px solid #ead3d9;
+	border-radius: 999px;
+	background: rgb(255 247 241 / 93%);
+	padding: 0.5rem 0.72rem;
+	color: #5e485a;
+	font-size: 0.74rem;
+	font-weight: 800;
+	box-shadow: 0 5px 13px rgb(82 55 70 / 10%);
+}
+
+.creator-badge span {
+	color: #c36d8b;
+	font-size: 1rem;
 }
 
 .gallery-lightbox-copy {
@@ -1845,31 +1879,53 @@ main {
 	margin-bottom: 0.5rem;
 }
 .gallery-lightbox-creator {
-	display: flex;
-	align-items: center;
-	gap: 0.4rem;
-	margin: 0.55rem 0 0;
+	margin: 0.1rem 0 0;
 	color: #705f72;
 	font-size: 0.82rem;
 	font-weight: 700;
 }
-.gallery-lightbox-creator span {
-	color: #c36d8b;
-	font-size: 1rem;
+
+.lightbox-price {
+	margin: 0.6rem 0 0;
+	color: #493957;
+	font-size: 1.2rem;
+	font-weight: 800;
+}
+
+.lightbox-status {
+	width: fit-content;
+	margin: 0.5rem 0 0;
+	border-radius: 999px;
+	background: #e7f0e9;
+	padding: 0.3rem 0.55rem;
+	color: #456452;
+	font-size: 0.7rem;
+	font-weight: 800;
+}
+
+.gallery-lightbox-description {
+	margin: 0.85rem 0 0;
+	color: #6e6272;
+	font-size: 0.88rem;
+	line-height: 1.55;
 }
 .gallery-lightbox-close {
 	position: absolute;
 	top: 0.7rem;
 	right: 0.7rem;
 	z-index: 1;
-	width: 38px;
-	height: 38px;
+	width: 44px;
+	height: 44px;
 	border: 1px solid #e3d8dc;
 	border-radius: 50%;
 	background: rgb(255 253 250 / 92%);
 	color: #6f5260;
 	font-size: 1.6rem;
 	line-height: 1;
+}
+.gallery-lightbox-close:focus-visible {
+	outline: 3px solid #876eb8;
+	outline-offset: 2px;
 }
 .round-button {
 	border: 0;
@@ -2155,6 +2211,11 @@ main {
 	}
 	.gallery-lightbox-copy {
 		padding: 0.25rem 0.45rem 0.45rem;
+	}
+	.creator-badge {
+		left: 0.75rem;
+		bottom: 0.75rem;
+		font-size: 0.68rem;
 	}
 	.gallery-lightbox h2 {
 		font-size: 1.35rem;

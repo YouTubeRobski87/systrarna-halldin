@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { tick } from 'svelte';
 	import GalleryLightbox from '$lib/components/GalleryLightbox.svelte';
 	import GalleryProductCard from '$lib/components/GalleryProductCard.svelte';
 	import {
@@ -13,6 +14,18 @@
 
 	let activeFilter = $state<GalleryFilter>('Alla');
 	let selectedProduct = $state<GalleryProduct | null>(null);
+	let previewTrigger = $state<HTMLButtonElement | null>(null);
+
+	function openPreview(product: GalleryProduct, trigger: HTMLButtonElement) {
+		previewTrigger = trigger;
+		selectedProduct = product;
+	}
+
+	async function closePreview() {
+		selectedProduct = null;
+		await tick();
+		previewTrigger?.focus();
+	}
 	const sortedProducts = $derived(sortFeaturedFirst(creativeGalleryProducts));
 	const filteredProducts = $derived(
 		activeFilter === 'Alla'
@@ -52,7 +65,7 @@
 
 	<section class="creative-gallery-grid" aria-live="polite">
 		{#each filteredProducts as product (product.id)}
-			<GalleryProductCard {product} onPreview={(product) => (selectedProduct = product)} />
+			<GalleryProductCard {product} onPreview={openPreview} />
 		{/each}
 	</section>
 
@@ -70,5 +83,5 @@
 </main>
 
 {#if selectedProduct}
-	<GalleryLightbox product={selectedProduct} close={() => (selectedProduct = null)} />
+	<GalleryLightbox product={selectedProduct} close={closePreview} />
 {/if}

@@ -5,13 +5,16 @@
 	let {
 		product,
 		onPreview
-	}: { product: GalleryProduct; onPreview: (product: GalleryProduct) => void } = $props();
+	}: {
+		product: GalleryProduct;
+		onPreview: (product: GalleryProduct, trigger: HTMLButtonElement) => void;
+	} = $props();
 </script>
 
 <article class="gallery-product-card">
 	<button
 		class="gallery-product-image"
-		onclick={() => onPreview(product)}
+		onclick={(event) => onPreview(product, event.currentTarget)}
 		aria-label={`Visa större bild av ${product.title}`}
 	>
 		<img
