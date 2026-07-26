@@ -225,7 +225,7 @@ const sourcedProducts: GalleryProduct[] = gallerySources.flatMap((source) => {
 			creator: null,
 			status: 'available',
 			featured: false,
-			isNew: true,
+			isNew: false,
 			image: createImagePath(folder, fileName),
 			alt: `${title} – handgjord skapelse av Alma och Emilia`,
 			imageWidth: 1536,

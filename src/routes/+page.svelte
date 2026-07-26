@@ -4,7 +4,7 @@
 	import TrustBar from '$lib/components/TrustBar.svelte';
 	import { products } from '$lib/data/products';
 
-	const nyinkommet = products.slice(0, 4);
+	const nyinkommet = products.filter((product) => product.isNew);
 	const almaFavoriter = products
 		.filter((product) => ['Armband', 'Pärlplattor'].includes(product.category))
 		.slice(0, 4);
