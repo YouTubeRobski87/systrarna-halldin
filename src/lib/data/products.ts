@@ -24,7 +24,13 @@ export const products: Product[] = creativeGalleryProducts.map((product) => ({
 	imageHeight: product.imageHeight,
 	featured: product.featured,
 	isNew: product.isNew,
-	status: product.status
+	status: product.status,
+	madeBy:
+		product.creator === 'Alma' ||
+		product.creator === 'Emilia' ||
+		product.creator === 'Alma & Emilia'
+			? product.creator
+			: undefined
 }));
 
 export const categories = ['Alla', ...creativeCategories] as const;

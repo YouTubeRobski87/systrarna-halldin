@@ -4,11 +4,12 @@ export const creativeCategories = [
 	'Nyckelringar',
 	'Pappers-squishies',
 	'Pärlplattor',
-	'Suddgummi'
+	'Suddgummi',
+	'Stressbollar'
 ] as const;
 
 export type CreativeCategory = (typeof creativeCategories)[number];
-export type GalleryCreator = 'Alma' | 'Emilia' | 'Alma och Emilia' | null;
+export type GalleryCreator = 'Alma' | 'Emilia' | 'Alma & Emilia' | null;
 export type GalleryStatus = 'available' | 'reserved' | 'sold' | 'not-for-sale';
 
 export type GalleryProduct = {
@@ -33,7 +34,8 @@ export const galleryPrices: Record<CreativeCategory, number> = {
 	Nyckelringar: 55,
 	'Pappers-squishies': 65,
 	Pärlplattor: 50,
-	Suddgummi: 20
+	Suddgummi: 20,
+	Stressbollar: 20
 };
 
 type GallerySource = {
@@ -169,7 +171,42 @@ const gallerySources: GallerySource[] = [
 const createImagePath = (folder: string, fileName: string) =>
 	encodeURI(`/images/produkter/original/${folder}/${fileName}`);
 
-export const creativeGalleryProducts: GalleryProduct[] = gallerySources.flatMap((source) => {
+const stressBallProducts: GalleryProduct[] = [
+	{
+		id: 'stressboll-stor-gul',
+		title: 'Stor gul stressboll',
+		category: 'Stressbollar',
+		description:
+			'En mjuk, handgjord stressboll i gul färg. Skön att klämma på när händerna behöver något att göra.',
+		price: 25,
+		creator: 'Alma & Emilia',
+		status: 'available',
+		featured: false,
+		isNew: true,
+		image: createImagePath('stressboll', 'stressboll-stor-gul.png'),
+		alt: 'Stor gul handgjord stressboll med transparent bakgrund',
+		imageWidth: 375,
+		imageHeight: 666
+	},
+	{
+		id: 'stressboll-liten-turkos',
+		title: 'Liten turkos stressboll',
+		category: 'Stressbollar',
+		description:
+			'En liten handgjord stressboll i turkos färg. Lätt att hålla i handen och klämma på.',
+		price: 20,
+		creator: 'Alma & Emilia',
+		status: 'available',
+		featured: false,
+		isNew: true,
+		image: createImagePath('stressboll', 'stressboll-liten-turkos.png'),
+		alt: 'Liten turkos handgjord stressboll med transparent bakgrund',
+		imageWidth: 375,
+		imageHeight: 666
+	}
+];
+
+const sourcedProducts: GalleryProduct[] = gallerySources.flatMap((source) => {
 	const files = [
 		...source.files.map((fileName) => ({ fileName, folder: source.folder })),
 		...(source.additionalFiles ?? [])
@@ -196,3 +233,8 @@ export const creativeGalleryProducts: GalleryProduct[] = gallerySources.flatMap(
 		};
 	});
 });
+
+export const creativeGalleryProducts: GalleryProduct[] = [
+	...sourcedProducts,
+	...stressBallProducts
+];

@@ -74,14 +74,14 @@
 				</div>
 			{/if}
 			<p class="description">{data.product.description}</p>
-			{#if data.product.madeBy && madeByStar}<p class="made-by">
-					<img
-						src={madeByStar}
-						alt=""
-						aria-hidden="true"
-						width={data.product.madeBy === 'Alma' ? 1536 : 918}
-						height={data.product.madeBy === 'Alma' ? 1024 : 588}
-					/>
+			{#if data.product.madeBy}<p class="made-by">
+					{#if madeByStar}<img
+							src={madeByStar}
+							alt=""
+							aria-hidden="true"
+							width={data.product.madeBy === 'Alma' ? 1536 : 918}
+							height={data.product.madeBy === 'Alma' ? 1024 : 588}
+						/>{/if}
 					<span>Tillverkad av {data.product.madeBy}</span>
 				</p>{/if}
 			{#if canChooseBonusBead}<fieldset class="bonus-beads">

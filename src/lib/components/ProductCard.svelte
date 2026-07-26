@@ -25,7 +25,9 @@
 		<p class="eyebrow">{product.category}</p>
 		<h3><a href={`/produkt/${product.slug}`}>{product.name}</a></h3>
 		<p>{product.shortDescription}</p>
-		<div class="product-meta"><span>Skapat av Alma & Emilia</span><span>Tillgänglig</span></div>
+		<div class="product-meta">
+			<span>Skapat av {product.madeBy ?? 'Alma & Emilia'}</span><span>Tillgänglig</span>
+		</div>
 		<div class="product-bottom">
 			<strong>{currency(product.price)}</strong><button
 				class="round-button"

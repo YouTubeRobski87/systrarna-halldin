@@ -1,7 +1,7 @@
 import type { CreativeCategory } from '$lib/data/creative-gallery';
 
 export type Category = CreativeCategory;
-export type MadeBy = 'Alma' | 'Emilia';
+export type MadeBy = 'Alma' | 'Emilia' | 'Alma & Emilia';
 export const bonusBeads = [
 	'Överraska mig',
 	'Rosa',
