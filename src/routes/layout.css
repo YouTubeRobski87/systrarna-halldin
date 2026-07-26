@@ -1648,6 +1648,8 @@ main {
 	gap: 1.25rem;
 }
 .gallery-product-card {
+	display: grid;
+	grid-template-rows: auto 1fr;
 	overflow: hidden;
 	border: 1px solid #eee3e4;
 	border-radius: 18px;
@@ -1670,6 +1672,7 @@ main {
 }
 .gallery-product-copy {
 	display: grid;
+	grid-template-rows: auto auto 1fr auto;
 	gap: 0.6rem;
 	padding: 1.15rem;
 }
@@ -1731,51 +1734,24 @@ main {
 	font-size: 0.87rem;
 }
 .gallery-product-bottom {
-	display: grid;
-	gap: 0.8rem;
 	margin-top: 0.45rem;
 }
 .gallery-product-bottom strong {
 	font-size: 0.9rem;
 }
-.gallery-interest-button {
-	display: inline-flex;
-	justify-content: center;
-	align-items: center;
-	min-height: 40px;
-	border: 1px solid #cfa7b7;
-	border-radius: 999px;
-	color: #88405e;
-	font-size: 0.84rem;
-	font-weight: 700;
-}
-.gallery-interest-unavailable {
-	display: inline-flex;
-	justify-content: center;
-	align-items: center;
-	min-height: 40px;
-	border: 1px solid #ded4d6;
-	border-radius: 999px;
-	color: #756b70;
-	font-size: 0.84rem;
-	font-weight: 700;
-}
-.gallery-interest {
-	display: flex;
-	align-items: center;
-	justify-content: space-between;
-	gap: 2rem;
+.gallery-closing {
 	margin-top: 4rem;
 	padding: 1.7rem;
 	border-radius: 20px;
 	background: #e7e1f0;
+	text-align: center;
 }
-.gallery-interest h2 {
+.gallery-closing h2 {
 	font-size: 1.7rem;
 }
-.gallery-interest p:last-child {
+.gallery-closing p {
 	max-width: 600px;
-	margin: 0.65rem 0 0;
+	margin: 0.65rem auto 0;
 	color: #625a67;
 }
 .gallery-lightbox-backdrop {
@@ -2182,15 +2158,9 @@ main {
 	.gallery-product-copy > p:not(.eyebrow) {
 		min-height: 0;
 	}
-	.gallery-interest {
-		align-items: stretch;
-		flex-direction: column;
-		gap: 1.25rem;
+	.gallery-closing {
 		margin-top: 2.5rem;
 		padding: 1.35rem;
-	}
-	.gallery-interest .button {
-		width: 100%;
 	}
 	.gallery-lightbox-backdrop {
 		padding: 0.75rem;

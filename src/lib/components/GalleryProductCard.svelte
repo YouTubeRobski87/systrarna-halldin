@@ -1,6 +1,6 @@
 <script lang="ts">
 	import type { GalleryProduct } from '$lib/data/creative-gallery';
-	import { canExpressInterest, getGalleryStatusLabel } from '$lib/utils/gallery-product';
+	import { getGalleryStatusLabel } from '$lib/utils/gallery-product';
 
 	let {
 		product,
@@ -38,11 +38,6 @@
 		<p>{product.description}</p>
 		<div class="gallery-product-bottom">
 			<strong>{product.price === null ? 'Pris kommer' : `${product.price} kr`}</strong>
-			{#if canExpressInterest(product.status)}
-				<a class="gallery-interest-button" href="#intresse">Jag är intresserad</a>
-			{:else}
-				<span class="gallery-interest-unavailable">{getGalleryStatusLabel(product.status)}</span>
-			{/if}
 		</div>
 	</div>
 </article>

@@ -69,16 +69,9 @@
 		{/each}
 	</section>
 
-	<section class="gallery-interest" id="intresse">
-		<div>
-			<p class="eyebrow">Hittat en favorit?</p>
-			<h2>Jag är intresserad</h2>
-			<p>
-				Skicka gärna ett meddelande på Instagram eller kontakta ansvarig vuxen, så berättar vi mer
-				om skapelsen och om den fortfarande finns kvar.
-			</p>
-		</div>
-		<a class="button" href="/kontakt">Till kontakt</a>
+	<section class="gallery-closing">
+		<h2>Fler skapelser kommer snart</h2>
+		<p>Alma och Emilia fyller på galleriet när nya idéer blir verklighet.</p>
 	</section>
 </main>
 
