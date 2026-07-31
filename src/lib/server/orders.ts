@@ -8,7 +8,7 @@ import {
 	type OrderStatus,
 	type PaymentStatus
 } from '$lib/order-status';
-import { getSupabaseAdmin } from '$lib/server/supabase';
+import { getSupabaseAdmin, SupabaseConfigurationError } from '$lib/server/supabase';
 
 export { orderStatuses, paymentStatuses, type OrderStatus, type PaymentStatus };
 
@@ -128,11 +128,29 @@ export async function createOrder(input: unknown) {
 }
 
 export async function getOrder(id: string) {
-	const { data, error: databaseError } = await getSupabaseAdmin()
-		.from('orders')
-		.select('*')
-		.eq('id', id)
-		.single();
-	if (databaseError || !data) error(404, 'Ordern hittades inte');
-	return data as OrderRecord;
+	let data: OrderRecord | null = null;
+	let databaseError: { code?: string; message: string } | null = null;
+	try {
+		const result = await getSupabaseAdmin().from('orders').select('*').eq('id', id).single();
+		data = result.data as OrderRecord | null;
+		databaseError = result.error;
+	} catch (cause) {
+		console.error('[admin order] Supabase is unavailable:', cause);
+		error(
+			503,
+			cause instanceof SupabaseConfigurationError
+				? cause.message
+				: 'Orderdatabasen kan inte nås just nu. Försök igen senare.'
+		);
+	}
+	if (databaseError?.code === 'PGRST116') error(404, 'Ordern hittades inte');
+	if (databaseError) {
+		console.error('[admin order] Failed to read public.orders:', databaseError);
+		error(
+			503,
+			'Orderdatabasen kan inte läsas just nu. Kontrollera Supabase-konfigurationen och tabellen orders.'
+		);
+	}
+	if (!data) error(404, 'Ordern hittades inte');
+	return data;
 }

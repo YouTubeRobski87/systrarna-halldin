@@ -10,18 +10,34 @@ export const actions: Actions = {
 		const parsed = orderUpdateSchema.safeParse(Object.fromEntries(await request.formData()));
 		if (!parsed.success) return fail(400, { message: 'Välj giltiga statusar.' });
 		if (!params.id) return fail(400, { message: 'Ordern saknar id.' });
-		const previousOrder = await getOrder(params.id);
-		const { data, error } = await getSupabaseAdmin()
-			.from('orders')
-			.update({ payment_status: parsed.data.paymentStatus, order_status: parsed.data.orderStatus })
-			.eq('id', params.id)
-			.select('*')
-			.single();
-		if (error) return fail(500, { message: 'Kunde inte spara ändringen.' });
-		await sendOrderStatusUpdate(data, {
-			paymentStatus: previousOrder.payment_status,
-			orderStatus: previousOrder.order_status
-		});
-		return { success: true };
+		try {
+			const previousOrder = await getOrder(params.id);
+			const { data, error } = await getSupabaseAdmin()
+				.from('orders')
+				.update({
+					payment_status: parsed.data.paymentStatus,
+					order_status: parsed.data.orderStatus
+				})
+				.eq('id', params.id)
+				.select('*')
+				.single();
+			if (error || !data) {
+				console.error('[admin order] Failed to update public.orders:', {
+					code: error?.code,
+					message: error?.message
+				});
+				return fail(503, {
+					message: 'Kunde inte spara ändringen. Kontrollera Supabase och försök igen.'
+				});
+			}
+			await sendOrderStatusUpdate(data, {
+				paymentStatus: previousOrder.payment_status,
+				orderStatus: previousOrder.order_status
+			});
+			return { success: true };
+		} catch (error) {
+			console.error('[admin order] Update failed because Supabase is unavailable:', error);
+			return fail(503, { message: 'Orderdatabasen kan inte nås just nu. Försök igen senare.' });
+		}
 	}
 };

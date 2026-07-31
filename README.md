@@ -31,7 +31,15 @@ ORDER_REPLY_TO=butik@systrarnahalldin.se
 
 `SUPABASE_SERVICE_ROLE_KEY` är endast för servern och får aldrig prefixet `PUBLIC_`. SQL-migreringen skapar tabellen `orders`, aktiverar RLS och ger inte `anon` eller `authenticated` åtkomst till kunddata. Den ändrar inga befintliga tabeller.
 
-I Render: öppna tjänsten, välj **Environment**, lägg in de tre variablerna ovan och gör en ny deploy. Sätt ett långt slumpmässigt värde för `ADMIN_PASSWORD`; när det ändras loggas befintliga admins ut automatiskt.
+I Render: öppna tjänsten, välj **Environment**, lägg in följande obligatoriska variabler för admin och orderdatabasen och gör en ny deploy:
+
+```text
+ADMIN_PASSWORD=<långt, unikt lösenord>
+SUPABASE_URL=https://<project-ref>.supabase.co
+SUPABASE_SERVICE_ROLE_KEY=<Supabase service_role/secret key>
+```
+
+`RESEND_API_KEY`, `ORDER_EMAIL_FROM` och `ORDER_REPLY_TO` krävs bara för e-postutskick; order och admin fungerar utan dem. `NODE_ENV` sätts automatiskt av Render och behöver inte läggas in manuellt. Sätt ett långt slumpmässigt värde för `ADMIN_PASSWORD`; när det ändras loggas befintliga admins ut automatiskt.
 
 ## Kundmejl med Resend
 

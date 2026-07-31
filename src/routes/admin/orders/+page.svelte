@@ -7,6 +7,7 @@
 	}: {
 		data: {
 			orders: OrderRecord[];
+			databaseError: string | null;
 			paymentStatuses: readonly string[];
 			orderStatuses: readonly string[];
 			filters: { paymentStatus: string; orderStatus: string; search: string };
@@ -53,25 +54,32 @@
 		>
 		<button class="button" type="submit">Filtrera</button>
 	</form>
-	<p class="result-count">{data.orders.length} order{data.orders.length === 1 ? '' : 'ar'}</p>
-	<section class="admin-order-list">
-		{#each data.orders as order (order.id)}
-			<article class="admin-order-row">
-				<div><strong>{order.order_number}</strong><span>{formatDate(order.created_at)}</span></div>
-				<div>
-					<b>{order.customer_name}</b><span
-						>{order.items.reduce((sum, item) => sum + item.quantity, 0)} produkter</span
-					>
-				</div>
-				<div>
-					<strong>{currency(order.total)}</strong><span class="status status-{order.payment_status}"
-						>{paymentStatusLabels[order.payment_status]}</span
-					><span class="status status-{order.order_status}"
-						>{orderStatusLabels[order.order_status]}</span
-					>
-				</div>
-				<a class="button" href={`/admin/orders/${order.id}`}>Öppna</a>
-			</article>
-		{:else}<p>Inga order matchar filtren.</p>{/each}
-	</section>
+	{#if data.databaseError}
+		<p class="form-error" role="alert">{data.databaseError}</p>
+	{:else}
+		<p class="result-count">{data.orders.length} order{data.orders.length === 1 ? '' : 'ar'}</p>
+		<section class="admin-order-list">
+			{#each data.orders as order (order.id)}
+				<article class="admin-order-row">
+					<div>
+						<strong>{order.order_number}</strong><span>{formatDate(order.created_at)}</span>
+					</div>
+					<div>
+						<b>{order.customer_name}</b><span
+							>{order.items.reduce((sum, item) => sum + item.quantity, 0)} produkter</span
+						>
+					</div>
+					<div>
+						<strong>{currency(order.total)}</strong><span
+							class="status status-{order.payment_status}"
+							>{paymentStatusLabels[order.payment_status]}</span
+						><span class="status status-{order.order_status}"
+							>{orderStatusLabels[order.order_status]}</span
+						>
+					</div>
+					<a class="button" href={`/admin/orders/${order.id}`}>Öppna</a>
+				</article>
+			{:else}<p>Inga order matchar filtren.</p>{/each}
+		</section>
+	{/if}
 </main>
