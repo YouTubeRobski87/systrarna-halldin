@@ -100,10 +100,17 @@
 		<div class="thank-you-copy">
 			<span class="thank-you-heart" aria-hidden="true">♥</span>
 			<h2 id="thank-you-heading">Varje köp betyder mycket för oss.</h2>
-			<p>
-				Tack för att du hjälper Alma och Emilia att fortsätta skapa, lära sig och utveckla sin
-				kreativitet. ❤️
-			</p>
+			<div class="thank-you-message">
+				<p>
+					Tack för att du hjälper Alma och Emilia att fortsätta skapa, lära sig och utveckla sin
+					kreativitet.
+				</p>
+				<p>
+					Varje beställning gör oss glada och inspirerar oss att skapa något nytt. Tack för att du
+					är en del av vår resa.
+				</p>
+			</div>
+			<p class="thank-you-signature">Med kärlek,<br /><strong>Alma &amp; Emilia 💜</strong></p>
 		</div>
 	</section>
 
