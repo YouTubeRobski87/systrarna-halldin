@@ -3469,6 +3469,76 @@ h1 {
 	font-size: 0.84rem;
 }
 
+.thank-you {
+	position: relative;
+	max-width: 920px;
+	margin: 0 auto 6rem;
+	padding: clamp(3.5rem, 7vw, 5.5rem) 2rem;
+	overflow: hidden;
+	border: 1px solid var(--line);
+	border-radius: 28px 54px 32px 48px;
+	background: linear-gradient(
+		120deg,
+		var(--rose-soft),
+		color-mix(in srgb, var(--warm-paper) 82%, white)
+	);
+	text-align: center;
+}
+
+.thank-you::before,
+.thank-you::after {
+	content: '';
+	position: absolute;
+	border: 2px solid color-mix(in srgb, var(--rose) 38%, transparent);
+	border-radius: 50%;
+	pointer-events: none;
+}
+
+.thank-you::before {
+	width: 9rem;
+	height: 5rem;
+	left: -2.8rem;
+	bottom: 1.2rem;
+	border-top-color: transparent;
+	transform: rotate(-16deg);
+}
+
+.thank-you::after {
+	width: 6rem;
+	height: 6rem;
+	right: -2.3rem;
+	top: -2.5rem;
+}
+
+.thank-you-copy {
+	position: relative;
+	z-index: 1;
+	max-width: 650px;
+	margin: 0 auto;
+}
+
+.thank-you-heart {
+	display: block;
+	margin-bottom: 0.85rem;
+	color: var(--rose);
+	font-family: 'DM Serif Display', Georgia, serif;
+	font-size: 2rem;
+	line-height: 1;
+}
+
+.thank-you h2 {
+	font-size: clamp(2.2rem, 4.5vw, 4rem);
+	line-height: 1.04;
+}
+
+.thank-you p {
+	max-width: 570px;
+	margin: 1rem auto 0;
+	color: color-mix(in srgb, var(--ink) 78%, var(--rose));
+	font-size: clamp(1rem, 1.8vw, 1.2rem);
+	line-height: 1.7;
+}
+
 .shop-cta {
 	position: relative;
 	max-width: 1180px;
@@ -3684,6 +3754,25 @@ h1 {
 
 	.promise-points article {
 		min-height: 0;
+	}
+
+	.thank-you {
+		margin: 4rem 1.25rem;
+		padding: 3.5rem 1.25rem;
+		border-radius: 22px 38px 24px 34px;
+	}
+
+	.thank-you::before {
+		width: 6rem;
+		left: -3.5rem;
+		bottom: 0.7rem;
+	}
+
+	.thank-you::after {
+		width: 4.5rem;
+		height: 4.5rem;
+		right: -2.4rem;
+		top: -2rem;
 	}
 
 	.shop-cta {

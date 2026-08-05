@@ -96,6 +96,17 @@
 		</div>
 	</section>
 
+	<section class="thank-you" aria-labelledby="thank-you-heading">
+		<div class="thank-you-copy">
+			<span class="thank-you-heart" aria-hidden="true">♥</span>
+			<h2 id="thank-you-heading">Varje köp betyder mycket för oss.</h2>
+			<p>
+				Tack för att du hjälper Alma och Emilia att fortsätta skapa, lära sig och utveckla sin
+				kreativitet. ❤️
+			</p>
+		</div>
+	</section>
+
 	<section class="shop-cta">
 		<span class="cta-sparkle" aria-hidden="true">✦</span>
 		<p class="eyebrow">Vår lilla webbshop</p>
