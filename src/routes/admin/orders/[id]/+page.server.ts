@@ -1,7 +1,11 @@
 import { fail, type Actions } from '@sveltejs/kit';
 import { sendOrderStatusUpdate } from '$lib/server/order-email';
 import { getOrder, orderUpdateSchema } from '$lib/server/orders';
-import { getSupabaseAdmin } from '$lib/server/supabase';
+import {
+	getSupabaseAdmin,
+	logSupabaseQueryError,
+	logSupabaseUnavailable
+} from '$lib/server/supabase';
 
 export const load = async ({ params }) => ({ order: await getOrder(params.id) });
 
@@ -22,10 +26,7 @@ export const actions: Actions = {
 				.select('*')
 				.single();
 			if (error || !data) {
-				console.error('[admin order] Failed to update public.orders:', {
-					code: error?.code,
-					message: error?.message
-				});
+				logSupabaseQueryError('[admin order] Failed to update public.orders:', error);
 				return fail(503, {
 					message: 'Kunde inte spara ändringen. Kontrollera Supabase och försök igen.'
 				});
@@ -36,7 +37,7 @@ export const actions: Actions = {
 			});
 			return { success: true };
 		} catch (error) {
-			console.error('[admin order] Update failed because Supabase is unavailable:', error);
+			logSupabaseUnavailable('[admin order] Update failed because Supabase is unavailable:', error);
 			return fail(503, { message: 'Orderdatabasen kan inte nås just nu. Försök igen senare.' });
 		}
 	}

@@ -1,4 +1,9 @@
-import { getSupabaseAdmin, SupabaseConfigurationError } from '$lib/server/supabase';
+import {
+	getSupabaseAdmin,
+	logSupabaseQueryError,
+	logSupabaseUnavailable,
+	SupabaseConfigurationError
+} from '$lib/server/supabase';
 import { orderStatuses, paymentStatuses, type OrderRecord } from '$lib/server/orders';
 
 export const load = async ({ url }) => {
@@ -13,17 +18,14 @@ export const load = async ({ url }) => {
 			.select('*')
 			.order('created_at', { ascending: false });
 		if (result.error) {
-			console.error('[admin orders] Failed to read public.orders:', {
-				code: result.error.code,
-				message: result.error.message
-			});
+			logSupabaseQueryError('[admin orders] Failed to read public.orders:', result.error);
 			databaseError =
 				'Kunde inte läsa orderlistan. Kontrollera Supabase-anslutningen och att tabellen orders har skapats.';
 		} else {
 			data = result.data as OrderRecord[];
 		}
 	} catch (error) {
-		console.error('[admin orders] Supabase is unavailable:', error);
+		logSupabaseUnavailable('[admin orders] Supabase is unavailable:', error);
 		databaseError =
 			error instanceof SupabaseConfigurationError
 				? error.message
