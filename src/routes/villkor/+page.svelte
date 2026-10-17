@@ -7,24 +7,15 @@
 <main class="page prose-page terms">
 	<p class="eyebrow">Bra att veta</p>
 	<h1>Köpvillkor</h1>
-	<aside class="review-note">
-		<b>Att granska före lansering</b>
-		<p>
-			Den här texten är en enkel mall och måste granskas och kompletteras av ansvarig vuxen innan
-			butiken öppnar.
-		</p>
-	</aside>
 	<section>
-		<h2>Beställning</h2>
-		<p>
-			Beställningar görs enbart via webbplatsen. En beställning blir giltig först när ansvarig vuxen
-			har bekräftat den via e-post.
-		</p>
-		<h2>Betalning</h2>
-		<p>
-			Betalningssätt och instruktioner skickas i samband med orderbekräftelsen. Ingen betalning tas
-			emot via sociala medier.
-		</p>
+		<h2>Så fungerar din beställning</h2>
+		<ol>
+			<li>Du lägger produkter i varukorgen och skickar din beställning.</li>
+			<li>Ansvarig vuxen får information om beställningen via e-post.</li>
+			<li>Du betalar med Swish och anger ditt ordernummer som meddelande.</li>
+			<li>Ansvarig vuxen loggar in i <code>/admin</code>, kontrollerar betalningen och uppdaterar orderstatusen.</li>
+			<li>När statusen ändras till exempelvis Betald, Packas eller Skickad skickas automatiskt ett uppdateringsmejl till dig.</li>
+		</ol>
 		<h2>Leverans</h2>
 		<p>Leveranssätt, kostnad och beräknad leveranstid bekräftas innan ordern genomförs.</p>
 		<h2>Retur</h2>
