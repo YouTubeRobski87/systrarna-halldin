@@ -8,6 +8,7 @@
 		data: {
 			orders: OrderRecord[];
 			databaseError: string | null;
+			databaseState: 'ready' | 'configuration-error' | 'connection-error' | 'query-error';
 			paymentStatuses: readonly string[];
 			orderStatuses: readonly string[];
 			filters: { paymentStatus: string; orderStatus: string; search: string };
@@ -55,7 +56,9 @@
 		<button class="button" type="submit">Filtrera</button>
 	</form>
 	{#if data.databaseError}
-		<p class="form-error" role="alert">{data.databaseError}</p>
+		<p class="form-error" role="alert" data-database-state={data.databaseState}>
+			{data.databaseError}
+		</p>
 	{:else}
 		<p class="result-count">{data.orders.length} order{data.orders.length === 1 ? '' : 'ar'}</p>
 		<section class="admin-order-list">
@@ -79,7 +82,13 @@
 					</div>
 					<a class="button" href={`/admin/orders/${order.id}`}>Öppna</a>
 				</article>
-			{:else}<p>Inga order matchar filtren.</p>{/each}
+			{:else}<p>
+					{data.filters.search ||
+					data.filters.paymentStatus !== 'all' ||
+					data.filters.orderStatus !== 'all'
+						? 'Inga order matchar filtren.'
+						: 'Inga beställningar finns ännu.'}
+				</p>{/each}
 		</section>
 	{/if}
 </main>

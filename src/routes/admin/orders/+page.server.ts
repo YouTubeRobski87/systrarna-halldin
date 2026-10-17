@@ -1,10 +1,13 @@
 import {
 	getSupabaseAdmin,
+	isSupabaseConnectionError,
 	logSupabaseQueryError,
 	logSupabaseUnavailable,
 	SupabaseConfigurationError
 } from '$lib/server/supabase';
 import { orderStatuses, paymentStatuses, type OrderRecord } from '$lib/server/orders';
+
+type DatabaseState = 'ready' | 'configuration-error' | 'connection-error' | 'query-error';
 
 export const load = async ({ url }) => {
 	const paymentStatus = url.searchParams.get('paymentStatus');
@@ -12,6 +15,7 @@ export const load = async ({ url }) => {
 	const search = url.searchParams.get('q')?.trim().toLocaleLowerCase('sv-SE') ?? '';
 	let data: OrderRecord[] | null = null;
 	let databaseError: string | null = null;
+	let databaseState: DatabaseState = 'ready';
 	try {
 		const result = await getSupabaseAdmin()
 			.from('orders')
@@ -19,17 +23,25 @@ export const load = async ({ url }) => {
 			.order('created_at', { ascending: false });
 		if (result.error) {
 			logSupabaseQueryError('[admin orders] Failed to read public.orders:', result.error);
-			databaseError =
-				'Kunde inte läsa orderlistan. Kontrollera Supabase-anslutningen och att tabellen orders har skapats.';
+			if (isSupabaseConnectionError(result.error)) {
+				databaseState = 'connection-error';
+				databaseError = 'Orderdatabasen kan inte nås just nu. Försök igen senare.';
+			} else {
+				databaseState = 'query-error';
+				databaseError = 'Orderhämtningen misslyckades. Felet är loggat på servern.';
+			}
 		} else {
 			data = result.data as OrderRecord[];
 		}
 	} catch (error) {
 		logSupabaseUnavailable('[admin orders] Supabase is unavailable:', error);
-		databaseError =
-			error instanceof SupabaseConfigurationError
-				? error.message
-				: 'Orderdatabasen kan inte nås just nu. Försök igen senare.';
+		if (error instanceof SupabaseConfigurationError) {
+			databaseState = 'configuration-error';
+			databaseError = error.message;
+		} else {
+			databaseState = 'connection-error';
+			databaseError = 'Orderdatabasen kan inte nås just nu. Försök igen senare.';
+		}
 	}
 	const orders = (data ?? []).filter((order) => {
 		const matchesPayment =
@@ -49,6 +61,7 @@ export const load = async ({ url }) => {
 	return {
 		orders,
 		databaseError,
+		databaseState,
 		paymentStatuses,
 		orderStatuses,
 		filters: { paymentStatus: paymentStatus ?? 'all', orderStatus: orderStatus ?? 'all', search }

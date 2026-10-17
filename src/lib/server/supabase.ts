@@ -3,12 +3,31 @@ import { env } from '$env/dynamic/private';
 
 export class SupabaseConfigurationError extends Error {}
 
-type SupabaseQueryError = {
+export type SupabaseQueryError = {
 	code?: string | null;
 	message?: string | null;
 	details?: string | null;
 	hint?: string | null;
 };
+
+const connectionErrorCodes = new Set(['PGRST000', 'PGRST001', 'PGRST002', 'PGRST003']);
+
+export function isSupabaseConnectionError(error: SupabaseQueryError | null | undefined) {
+	if (error?.code && connectionErrorCodes.has(error.code)) return true;
+
+	const description = [error?.message, error?.details, error?.hint]
+		.filter(Boolean)
+		.join(' ')
+		.toLocaleLowerCase('en-US');
+
+	return [
+		'connection refused',
+		'connection terminated',
+		'connection timeout',
+		'failed to fetch',
+		'fetch failed'
+	].some((fragment) => description.includes(fragment));
+}
 
 function getSupabaseCredentials() {
 	return {
