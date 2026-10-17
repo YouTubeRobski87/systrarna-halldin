@@ -1,4 +1,4 @@
-import type { CreativeCategory, GalleryStatus } from '$lib/data/creative-gallery';
+import type { CreativeCategory, GallerySize, GalleryStatus } from '$lib/data/creative-gallery';
 
 export type Category = CreativeCategory;
 export type MadeBy = 'Alma' | 'Emilia' | 'Alma & Emilia';
@@ -24,6 +24,7 @@ export interface Product {
 	shortDescription: string;
 	description: string;
 	price: number;
+	size?: GallerySize;
 	category: Category;
 	image: string;
 	imageAlt: string;

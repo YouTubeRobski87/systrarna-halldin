@@ -17,6 +17,7 @@ export const products: Product[] = creativeGalleryProducts.map((product) => ({
 	shortDescription: product.description,
 	description: product.description,
 	price: product.price ?? 0,
+	size: product.size,
 	category: product.category,
 	image: product.image,
 	imageAlt: product.alt,

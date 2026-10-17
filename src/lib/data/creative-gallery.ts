@@ -10,6 +10,7 @@ export const creativeCategories = [
 
 export type CreativeCategory = (typeof creativeCategories)[number];
 export type GalleryCreator = 'Alma' | 'Emilia' | 'Alma & Emilia' | null;
+export type GallerySize = 'small' | 'large';
 export type GalleryStatus =
 	'available' | 'reserved' | 'sold' | 'temporarily-sold-out' | 'not-for-sale';
 
@@ -19,6 +20,7 @@ export type GalleryProduct = {
 	category: CreativeCategory;
 	description: string;
 	price: number | null;
+	size?: GallerySize;
 	creator: GalleryCreator;
 	status: GalleryStatus;
 	featured: boolean;
@@ -47,7 +49,13 @@ type GallerySource = {
 	files: string[];
 	additionalFiles?: { fileName: string; folder: string }[];
 	priceOverrides?: Record<string, number>;
+	sizeOverrides?: Record<string, GallerySize>;
 	statusOverrides?: Record<string, GalleryStatus>;
+};
+
+const beadPlatePrices: Record<GallerySize, number> = {
+	small: 25,
+	large: 35
 };
 
 const gallerySources: GallerySource[] = [
@@ -135,10 +143,15 @@ const gallerySources: GallerySource[] = [
 			'parlplatta-08.jpg',
 			'parlplatta-09.jpg'
 		],
+		sizeOverrides: {
+			'parlplatta-01.jpg': 'small',
+			'parlplatta-02.jpg': 'small',
+			'parlplatta-03.jpg': 'small',
+			'parlplatta-04.jpg': 'small',
+			'parlplatta-05.jpg': 'small',
+			'parlplatta-06.jpg': 'small'
+		},
 		priceOverrides: {
-			'parlplatta-03.jpg': 35,
-			'parlplatta-04.jpg': 35,
-			'parlplatta-05.jpg': 35,
 			'parlplatta-07.jpg': 35,
 			'parlplatta-08.jpg': 35,
 			'parlplatta-09.jpg': 35
@@ -220,13 +233,18 @@ const sourcedProducts: GalleryProduct[] = gallerySources.flatMap((source) => {
 	return files.map(({ fileName, folder }, index) => {
 		const number = String(index + 1).padStart(2, '0');
 		const title = `${source.titlePrefix} ${number}`;
+		const size = source.sizeOverrides?.[fileName];
 
 		return {
 			id: `${source.idPrefix}-${number}`,
 			title,
 			category: source.category,
 			description: 'Handgjord skapelse av Alma och Emilia.',
-			price: source.priceOverrides?.[fileName] ?? galleryPrices[source.category],
+			price:
+				source.category === 'Pärlplattor' && size
+					? beadPlatePrices[size]
+					: (source.priceOverrides?.[fileName] ?? galleryPrices[source.category]),
+			size,
 			creator: null,
 			status: source.statusOverrides?.[fileName] ?? 'available',
 			featured: false,
