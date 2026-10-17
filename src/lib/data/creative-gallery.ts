@@ -51,6 +51,7 @@ type GallerySource = {
 	priceOverrides?: Record<string, number>;
 	sizeOverrides?: Record<string, GallerySize>;
 	statusOverrides?: Record<string, GalleryStatus>;
+	titleOverrides?: Record<string, string>;
 };
 
 const beadPlatePrices: Record<GallerySize, number> = {
@@ -118,7 +119,20 @@ const gallerySources: GallerySource[] = [
 			'rod-mane-nyckelring-01.jpg',
 			'rosa-parl-nyckelring-01.jpg',
 			'rosa-parl-nyckelring-02.jpg'
-		]
+		],
+		titleOverrides: {
+			'bi-nyckelring-01.jpg': 'Bi-nyckelring',
+			'bla-parl-nyckelring-01.jpg': 'Blå pärlnyckelring',
+			'gron-parl-nyckelring-01.jpg': 'Grön pärlnyckelring',
+			'lila-mane-nyckelring-01.jpg': 'Lila måne-nyckelring',
+			'lila-parl-nyckelring-01.jpg': 'Lila pärlnyckelring',
+			'orange-parl-nyckelring-01.jpg': 'Orange pärlnyckelring',
+			'regnbage-nyckelring-01.jpg': 'Regnbågsnyckelring',
+			'regnbage-parl-nyckelring-01.jpg': 'Regnbågspärlnyckelring',
+			'rod-mane-nyckelring-01.jpg': 'Röd måne-nyckelring',
+			'rosa-parl-nyckelring-01.jpg': 'Rosa pärlnyckelring',
+			'rosa-parl-nyckelring-02.jpg': 'Rosa pärlnyckelring II'
+		}
 	},
 	{
 		category: 'Pappers-squishies',
@@ -230,7 +244,7 @@ const sourcedProducts: GalleryProduct[] = gallerySources.flatMap((source) => {
 
 	return files.map(({ fileName, folder }, index) => {
 		const number = String(index + 1).padStart(2, '0');
-		const title = `${source.titlePrefix} ${number}`;
+		const title = source.titleOverrides?.[fileName] ?? `${source.titlePrefix} ${number}`;
 		const size = source.sizeOverrides?.[fileName];
 
 		return {
