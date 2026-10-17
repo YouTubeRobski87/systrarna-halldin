@@ -10,7 +10,8 @@ export const creativeCategories = [
 
 export type CreativeCategory = (typeof creativeCategories)[number];
 export type GalleryCreator = 'Alma' | 'Emilia' | 'Alma & Emilia' | null;
-export type GalleryStatus = 'available' | 'reserved' | 'sold' | 'not-for-sale';
+export type GalleryStatus =
+	'available' | 'reserved' | 'sold' | 'temporarily-sold-out' | 'not-for-sale';
 
 export type GalleryProduct = {
 	id: string;
@@ -33,7 +34,7 @@ export const galleryPrices: Record<CreativeCategory, number> = {
 	Klistermärken: 10,
 	Nyckelringar: 35,
 	'Pappers-squishies': 35,
-	Pärlplattor: 50,
+	Pärlplattor: 25,
 	Suddgummi: 20,
 	Stressbollar: 20
 };
@@ -46,6 +47,7 @@ type GallerySource = {
 	files: string[];
 	additionalFiles?: { fileName: string; folder: string }[];
 	priceOverrides?: Record<string, number>;
+	statusOverrides?: Record<string, GalleryStatus>;
 };
 
 const gallerySources: GallerySource[] = [
@@ -134,12 +136,15 @@ const gallerySources: GallerySource[] = [
 			'parlplatta-09.jpg'
 		],
 		priceOverrides: {
-			'parlplatta-03.jpg': 70,
-			'parlplatta-04.jpg': 70,
-			'parlplatta-05.jpg': 70,
-			'parlplatta-07.jpg': 70,
-			'parlplatta-08.jpg': 70,
-			'parlplatta-09.jpg': 70
+			'parlplatta-03.jpg': 35,
+			'parlplatta-04.jpg': 35,
+			'parlplatta-05.jpg': 35,
+			'parlplatta-07.jpg': 35,
+			'parlplatta-08.jpg': 35,
+			'parlplatta-09.jpg': 35
+		},
+		statusOverrides: {
+			'parlplatta-07.jpg': 'temporarily-sold-out'
 		}
 	},
 	{
@@ -223,7 +228,7 @@ const sourcedProducts: GalleryProduct[] = gallerySources.flatMap((source) => {
 			description: 'Handgjord skapelse av Alma och Emilia.',
 			price: source.priceOverrides?.[fileName] ?? galleryPrices[source.category],
 			creator: null,
-			status: 'available',
+			status: source.statusOverrides?.[fileName] ?? 'available',
 			featured: false,
 			isNew: false,
 			image: createImagePath(folder, fileName),

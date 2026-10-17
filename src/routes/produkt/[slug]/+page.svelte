@@ -3,6 +3,7 @@
 	import { products } from '$lib/data/products';
 	import { addToCart } from '$lib/stores/cart';
 	import { currency } from '$lib/utils/currency';
+	import { getGalleryStatusLabel } from '$lib/utils/gallery-product';
 	import { bonusBeads, hasBonusBeadOffer, type BonusBead } from '$lib/types/product';
 	import QuantitySelector from '$lib/components/QuantitySelector.svelte';
 	import ProductGrid from '$lib/components/ProductGrid.svelte';
@@ -10,6 +11,10 @@
 	let quantity = $state(1);
 	let bonusBead = $state<BonusBead>(bonusBeads[0]);
 	let added = $state(false);
+	const available = $derived(!data.product.status || data.product.status === 'available');
+	const statusLabel = $derived(
+		data.product.status ? getGalleryStatusLabel(data.product.status) : 'Tillgänglig'
+	);
 	const canChooseBonusBead = $derived(hasBonusBeadOffer(data.product.category));
 	const madeByStar = $derived(
 		data.product.madeBy === 'Alma'
@@ -27,7 +32,8 @@
 			offers: {
 				'@type': 'Offer',
 				price: data.product.price,
-				priceCurrency: 'SEK'
+				priceCurrency: 'SEK',
+				availability: available ? 'https://schema.org/InStock' : 'https://schema.org/OutOfStock'
 			}
 		})
 	);
@@ -37,6 +43,7 @@
 			.slice(0, 3)
 	);
 	function add() {
+		if (!available) return;
 		addToCart(data.product, canChooseBonusBead ? bonusBead : undefined, quantity);
 		added = true;
 		setTimeout(() => (added = false), 1800);
@@ -67,6 +74,7 @@
 			<p class="eyebrow">{data.product.category}</p>
 			<h1>{data.product.name}</h1>
 			<strong class="price">{currency(data.product.price)}</strong>
+			{#if !available}<p class="product-status">{statusLabel}</p>{/if}
 			{#if canChooseBonusBead}
 				<div class="product-promises">
 					<p>🎁 Extra pärla medföljer</p>
@@ -99,13 +107,15 @@
 						{/each}
 					</div>
 				</fieldset>{/if}
-			<div class="purchase">
-				<QuantitySelector
-					value={quantity}
-					max={99}
-					onChange={(value) => (quantity = value)}
-				/><button class="button" onclick={add}>Lägg i varukorgen →</button>
-			</div>
+			{#if available}
+				<div class="purchase">
+					<QuantitySelector
+						value={quantity}
+						max={99}
+						onChange={(value) => (quantity = value)}
+					/><button class="button" onclick={add}>Lägg i varukorgen →</button>
+				</div>
+			{/if}
 			{#if added}<p class="toast detail-toast">Tillagd i varukorgen ♡</p>{/if}<small
 				>Handgjort eller utvalt med omsorg.</small
 			>

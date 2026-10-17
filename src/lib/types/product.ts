@@ -1,4 +1,4 @@
-import type { CreativeCategory } from '$lib/data/creative-gallery';
+import type { CreativeCategory, GalleryStatus } from '$lib/data/creative-gallery';
 
 export type Category = CreativeCategory;
 export type MadeBy = 'Alma' | 'Emilia' | 'Alma & Emilia';
@@ -31,6 +31,6 @@ export interface Product {
 	imageHeight: number;
 	featured: boolean;
 	isNew?: boolean;
-	status?: 'available' | 'reserved' | 'sold' | 'not-for-sale';
+	status?: GalleryStatus;
 	madeBy?: MadeBy;
 }

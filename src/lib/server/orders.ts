@@ -91,6 +91,11 @@ export async function createOrder(input: unknown) {
 				success: false as const,
 				message: 'En produkt i varukorgen finns inte längre kvar.'
 			};
+		if (product.status && product.status !== 'available')
+			return {
+				success: false as const,
+				message: `${product.name} kan inte beställas just nu.`
+			};
 		items.push({
 			productId: product.id,
 			name: product.name,

@@ -8,7 +8,12 @@ const key = 'systrarna-halldin-cart';
 const storedItems: CartItem[] = browser ? JSON.parse(localStorage.getItem(key) ?? '[]') : [];
 const initial = storedItems.flatMap((item) => {
 	const product = products.find((candidate) => candidate.id === item.product?.id);
-	if (!product || (item.bonusBead !== undefined && !bonusBeads.includes(item.bonusBead))) return [];
+	if (
+		!product ||
+		(product.status && product.status !== 'available') ||
+		(item.bonusBead !== undefined && !bonusBeads.includes(item.bonusBead))
+	)
+		return [];
 	return [{ ...item, product }];
 });
 export const cart = writable<CartItem[]>(initial);
@@ -20,6 +25,7 @@ export const cartTotal = derived(cart, (items) =>
 	items.reduce((sum, item) => sum + item.product.price * item.quantity, 0)
 );
 export function addToCart(product: Product, bonusBead?: BonusBead, quantity = 1) {
+	if (product.status && product.status !== 'available') return;
 	const maxQuantity = 99;
 	cart.update((items) => {
 		const found = items.find(

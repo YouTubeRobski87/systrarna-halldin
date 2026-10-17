@@ -2,9 +2,15 @@
 	import { bonusBeads, hasBonusBeadOffer, type Product } from '$lib/types/product';
 	import { addToCart } from '$lib/stores/cart';
 	import { currency } from '$lib/utils/currency';
+	import { getGalleryStatusLabel } from '$lib/utils/gallery-product';
 	let { product }: { product: Product } = $props();
 	let added = $state(false);
+	const available = $derived(!product.status || product.status === 'available');
+	const statusLabel = $derived(
+		product.status ? getGalleryStatusLabel(product.status) : 'Tillgänglig'
+	);
 	function add() {
+		if (!available) return;
 		addToCart(product, hasBonusBeadOffer(product.category) ? bonusBeads[0] : undefined);
 		added = true;
 		setTimeout(() => (added = false), 1800);
@@ -30,13 +36,18 @@
 		<h3><a href={`/produkt/${product.slug}`}>{product.name}</a></h3>
 		<p>{product.shortDescription}</p>
 		<div class="product-meta">
-			<span>Skapat av {product.madeBy ?? 'Alma & Emilia'}</span><span>Tillgänglig</span>
+			<span>Skapat av {product.madeBy ?? 'Alma & Emilia'}</span><span class:unavailable={!available}
+				>{statusLabel}</span
+			>
 		</div>
 		<div class="product-bottom">
 			<strong>{currency(product.price)}</strong><button
 				class="round-button"
-				aria-label={`Lägg ${product.name} i varukorgen`}
-				onclick={add}>+</button
+				disabled={!available}
+				aria-label={available
+					? `Lägg ${product.name} i varukorgen`
+					: `${product.name}: ${statusLabel.toLocaleLowerCase('sv-SE')}`}
+				onclick={add}>{available ? '+' : '×'}</button
 			>
 		</div>
 		{#if hasBonusBeadOffer(product.category)}
