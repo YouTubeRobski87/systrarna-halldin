@@ -149,12 +149,10 @@ const gallerySources: GallerySource[] = [
 			'parlplatta-03.jpg': 'small',
 			'parlplatta-04.jpg': 'small',
 			'parlplatta-05.jpg': 'small',
-			'parlplatta-06.jpg': 'small'
-		},
-		priceOverrides: {
-			'parlplatta-07.jpg': 35,
-			'parlplatta-08.jpg': 35,
-			'parlplatta-09.jpg': 35
+			'parlplatta-06.jpg': 'small',
+			'parlplatta-07.jpg': 'large',
+			'parlplatta-08.jpg': 'large',
+			'parlplatta-09.jpg': 'large'
 		},
 		statusOverrides: {
 			'parlplatta-07.jpg': 'temporarily-sold-out'
